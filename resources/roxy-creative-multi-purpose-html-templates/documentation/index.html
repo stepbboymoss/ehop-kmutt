@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+		
+        <title>Roxy | Creative Multi-Purpose HTML Templates</title>
+
+        <!-- Style CSS -->
+        <link href="css/collection.css" rel="stylesheet">
+
+        <!-- Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,400,500%7CLato:300,400" rel="stylesheet" type="text/css">
+    </head>
+
+    <body data-spy="scroll" data-target=".sidebar" data-offset="200">
+
+        <!-- Sidebar -->
+        <aside class="sidebar sidebar-boxed sidebar-dark">  
+            <ul class="nav sidenav dropable">
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#getting_started" title="Getting Started">Getting Started</a></li>
+                <li><a href="#head_css_structure" title="HEAD CSS Structure">HEAD CSS Structure</a></li>
+				<li><a href="#template_colors" title="Template Colors">Template Colors</a></li>
+                <li><a href="#top_nav_menu" title="Top Nav Menu">Nav Menu</a></li>
+                <li><a href="#javascript_structure" title="Javascript Structure">Javascript Structure</a></li>
+                <li><a href="#html_structure" title="HTML Structure">HTML Structure</a></li>
+                <li><a href="#responsive_media_query" title="Responsive Media Query">Responsive Media Query</a></li>
+                <li><a href="#preloader" title="Preloader">Preloader</a></li>
+				<li><a href="#contact_form" title="Contact Form">Contact Form</a></li>
+                <li><a href="#fonts_used" title="Fonts used">Fonts used</a></li>
+                <li><a href="#credits" title="Credits">Credits</a></li>
+                <li><a href="#supports" title="Support">Support</a></li>
+            </ul>
+        </aside>
+        <!-- END Sidebar -->
+
+        <header class="site-header navbar-transparent"> 
+            <!-- Banner -->
+            <div class="banner auto-size" style="background-color: #455aa2">
+                <div class="container-fluid text-white" style="background-color: #455aa2">
+                    <h1 style="margin: 0; padding: 30px 0;"><strong>Roxy</strong> Documentation</h1>
+                </div>
+            </div>
+            <!-- END Banner --> 
+        </header>
+        
+        <main class="container-fluid"> 
+
+            <!-- Main content -->
+            <article class="main-content" role="main">
+                <section id="introduction">
+                    <h2 style="margin-top: 0; line-height: 45px;">Introduction</h2>
+                    <p>
+                        <b>Roxy</b> is a creative Bootstrap 4 based HTML template with unique design layouts and styles. This template will help to showcase your Product Landing page, Portfolio, Agency, Photography, Travel Agency, Corporate, Business, Fitness Center, Restaurant, Medical, Construction, Education site or your just a Blog. With stacks of retina ready layout designs, user-friendly options, and multipurpose design orientation made the template all in one digital presentation for any business focussed website. <b>Roxy</b> is well organized, visually stunning and constantly evolving through continuous template updates.
+                    </p>
+                    
+                    <h6 style="margin-top: 35px;"><strong>Template Features:</strong></h6>
+                    <ul>
+                        <li><strong>Onepage</strong> Demos</li>
+                        <li>Easy to customize</li>
+                        <li>HTML5 & CSS3</li>
+                        <li>Clean & Simple Design</li>
+                        <li>Fully Responsive Layout</li>
+                        <li>Crossbrowser Compatible with Edge, IE10+, Firefox, Safari, Opera, Chrome</li>
+                        <li>W3 Valid</li>
+                        <li>Retina ready</li>
+                        <li>Flaticon & FontAwesome <strong>Free icons</strong></li>
+                        <li>Powered with Bootstrap <strong>(v4)</strong></li>
+						<li><strong>AJAX contact form Submission</strong></li>
+                        <li>Smooth animation </li>
+                        <li><strong>Well documented</strong></li>
+                    </ul>
+
+                </section>
+                
+                <section id="getting_started">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Getting Started</h3>
+                    </div>
+                    <p>Unzip the archive and find out the folder <strong>roxy</strong> or <strong>roxy-rtl</strong>. There are all the template files in this folder.</p>
+                    <p>The <strong>file and folder structure</strong> is something like this:</p>
+                    <ol>
+                        <li><strong>assets/css</strong> — folder with css files.</li>
+                        <li><strong>assets/fonts</strong> — folder with icon fonts files.</li>
+                        <li><strong>assets/img</strong> — folder with image files.</li>
+                        <li><strong>assets/include</strong> — folder with Javascript files.</li>
+                        <li><strong>assets/js</strong> — folder with Javascript files.</li>
+                    </ol>
+                    <p>Upload the template files to server with the help of one of the FTP-clients like FileZilla.</p>
+
+                    <h6 style="margin-top: 20px; margin-bottom: 10px;"><strong>HTML Files:</strong></h6>
+					<p style="margin: 0 0 5px;">LTR demo:</p>
+                    <ul>
+                        <li>Home Page 1 (<b>index.html</b>)</li>
+                        <li>Home Page 2 (<b>index-2.html</b>)</li>
+                        <li>Home Page 3 (<b>index-3.html</b>)</li>
+                        <li>Blog Page 1 (<b>blog.html</b>)</li>
+                        <li>Blog Page 2 (<b>blog2.html</b>)</li>
+                        <li>Blog Details Page (<b>blog-details.html</b>)</li>
+                    </ul>
+					<p style="margin: 15px 0 5px;">RTL demo:</p>
+                    <ul>
+                        <li>Home Page 1 (<b>index.html</b>)</li>
+                        <li>Home Page 2 (<b>index-2.html</b>)</li>
+                        <li>Home Page 3 (<b>index-3.html</b>)</li>
+                        <li>Blog Page 1 (<b>blog.html</b>)</li>
+                        <li>Blog Page 2 (<b>blog2.html</b>)</li>
+                        <li>Blog Details Page (<b>blog-details.html</b>)</li>
+                    </ul>
+                </section>
+                
+                <section id="head_css_structure">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">HEAD CSS Structure</h3>
+                    </div>
+                    <p> These are the <strong>css</strong> files which are loaded into the <strong>template</strong> in <strong>Head Section</strong>.</p>
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;!-- Links of css files --&gt;
+&lt;link href=&quot;assets/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/font-awesome.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/owl.carousel.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/magnific-popup.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/animate.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/flaticon.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/responsive.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/color/color-default.css&quot; rel=&quot;stylesheet&quot;&gt;
+</code>
+</pre class="brush:css">
+                </section>
+				
+				<section id="template_colors">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Template Color Change</h3>
+                    </div>
+                    <p>These are the <strong>css</strong> files which are loaded into the <strong>template color.</strong></p>
+					<ol>
+						<li><strong>assets/css/color</strong> — folder with css files. </li>
+					</ol>
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;!-- Links of css files --&gt;
+&lt;link href=&quot;assets/css/color/color-default.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/color/color-black.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/color/color-blue.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/color/color-green.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/color/color-magenta.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;link href=&quot;assets/css/color/color-red.css&quot; rel=&quot;stylesheet&quot;&gt;
+</code>
+</pre class="brush:css">
+                </section>
+
+                <section id="top_nav_menu">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Top Navbar</h3>
+                    </div>
+                    <p>This is the basic structure of <strong>Top Navbar:</strong></p>
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;!-- Start Main Header --&gt;
+&lt;header class="main-nav"&gt;
+	&lt;nav class="navbar navbar-default"&gt;
+		&lt;div class="container"&gt;
+			&lt;div class="navbar-header"&gt;
+				&lt;button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"&gt;
+					&lt;span class="icon-bar top-bar"&gt;&lt;/span&gt;
+					&lt;span class="icon-bar middle-bar"&gt;&lt;/span&gt;
+					&lt;span class="icon-bar bottom-bar"&gt;&lt;/span&gt;
+				&lt;/button&gt;
+				&lt;a class="navbar-brand logo" href="index.html"&gt;&lt;img src="assets/img/logo.png" alt="Logo"&gt;&lt;/a&gt;
+				&lt;a class="navbar-brand logo-2" href="index.html"&gt;&lt;img class="img-responsive" src="assets/img/logo2.png" alt="Logo"&gt;&lt;/a&gt;
+			&lt;/div&gt;
+
+			&lt;div class="collapse navbar-collapse"&gt;
+				&lt;ul class="nav navbar-nav pull-right"&gt;
+					&lt;li class="active"&gt;&lt;a class="smooths" href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#services"&gt;Services&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#works"&gt;Works&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#team"&gt;Team&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#blog"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#pricing"&gt;Pricing&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a class="smooths" href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+			&lt;/div&gt;&lt;!--/.nav-collapse --&gt;
+			&lt;!-- header-search --&gt;
+			&lt;div class="header-search"&gt;
+				&lt;button class="search-toggle" data-toggle="modal" data-target="#myModal"&gt;&lt;i class="fa fa-search"&gt;&lt;/i&gt;&lt;/button&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/nav&gt;
+&lt;/header&gt;
+&lt;!-- End Main Header --&gt;
+</code>
+</pre>
+                </section>
+
+                <section id="javascript_structure">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Javascript Structure</h3>
+                    </div>
+                    <p> These are the <strong>JS</strong> files which are loaded into the <strong>template</strong> before the end of the <strong>HEAD and BODY Section</strong>.</p>
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;!-- All Javascript Plugin File here --&gt;
+&lt;script src="assets/js/jquery-1.12.4.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/owl.carousel.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/owl.carousel2.thumbs.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/jquery.magnific-popup.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/jquery.parallax-scroll.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/isotope.pkgd.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/scrollreveal.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/wow.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/jquery.counterup.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/waypoints.min.js"&gt;&lt;/script&gt;
+&lt;script src="assets/js/active.js"&gt;&lt;/script&gt;
+</code>
+</pre>
+                </section>
+                
+                <section id="html_structure">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">HTML Structure</h3>
+                    </div>
+                    This template has a responsive layout and is based on the <strong>Bootstrap Framework</strong>. For more information about this visit <a target="_blank" href="http://getbootstrap.com/css/"><strong>Bootstrap CSS</strong></a>.
+                    <p>The general template structure is the same throughout the template, each of the part is under a section with a section id name. Here is the <strong>general structure:</strong></p>
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;!-- Start About Us Area --&gt;
+&lt;section id="about" class="about-us ptb-100"&gt;
+	&lt;div class="container"&gt;
+		&lt;div class="col-md-8 col-md-offset-2 text-center"&gt;
+			&lt;div class="section-title" data-aos="fade-down"&gt;
+				&lt;h2&gt;About Us&lt;/h2&gt;
+				&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac augue at erat hendrerit dictum. Praesent porta, purus eget sagittis imperdiet.&lt;/p&gt;
+				&lt;span class="section-title-bg"&gt;About&lt;/span&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+
+		&lt;div class="row"&gt;
+			&lt;div class="col-md-4"&gt;
+				&lt;div class="about-info" data-aos="fade-up"&gt;
+					&lt;h3&gt;Backgrounds&lt;/h3&gt;
+					&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+
+			&lt;div class="col-md-4"&gt;
+				&lt;div class="about-info" data-aos="fade-up"&gt;
+					&lt;h3&gt;Our Approach&lt;/h3&gt;
+					&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+
+			&lt;div class="col-md-4" data-aos="fade-up"&gt;
+				&lt;div class="about-info"&gt;
+					&lt;h3&gt;Methodology&lt;/h3&gt;
+					&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+
+			&lt;div class="col-md-4" data-aos="fade-up"&gt;
+				&lt;div class="about-info"&gt;
+					&lt;h3&gt;Methodology&lt;/h3&gt;
+					&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+
+			&lt;div class="col-md-4" data-aos="fade-up"&gt;
+				&lt;div class="about-info"&gt;
+					&lt;h3&gt;Methodology&lt;/h3&gt;
+					&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+
+			&lt;div class="col-md-4" data-aos="fade-up"&gt;
+				&lt;div class="about-info"&gt;
+					&lt;h3&gt;Methodology&lt;/h3&gt;
+					&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- End About Us Area --&gt;
+</code>
+</pre>
+                </section>
+                
+                <section id="responsive_media_query">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Responsive Media Query</h3>
+                    </div>
+                    <p>We have added some utility classes with media queries for <strong>different screen sizes</strong>. All of the custom responsive css code are under the responsive.css file at the bottom showing, how many screen size we truck for media query:</p>
+                    <div class="table-responsive">
+                        <table style="font-size: 13px;" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;"> Display Size: </th>
+                                    <th> Details </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                <td style="width: 20%;">max-width : 767px</td>
+<td>
+<pre class="line-numbers">
+	<code class="lang-css">
+	/* Here is the css code for max-width : 767px: */
+
+	/* Small Devices, Mobile, SmartPhone, Iphone ----------- */
+	@media screen and (max-width: 767px) {
+
+	}
+
+	</code>
+</pre>
+</td>
+                                </tr>
+                                <tr>
+                <td style="width: 20%;">(min-width : 768px) and (max-width : 991px)</td>
+<td> 
+	<pre class="line-numbers">
+	<code class="lang-css">
+	/* Here is the css code for (min-width : 768px) and (max-width : 991px) */
+
+	/* iPads (portrait and landscape) ----------- */
+	@media only screen and (min-width : 768px) and (max-width : 991px) {
+
+	}
+	</code>
+	</pre>
+</td>
+                                </tr>
+                                <tr>
+                <td style="width: 20%;">(min-width : 992px) and (max-width : 1199px)</td>
+<td>
+	<pre class="line-numbers">
+	<code class="lang-css">
+	/* Here is the css code for (min-width : 992px) and (max-width : 1199px) */
+
+	/* iPads (landscape) ----------- */
+	@media only screen and (min-width : 992px) and (max-width : 1199px) {
+
+	}
+	</code>
+	</pre>
+</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="preloader">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Preloader</h3>
+                    </div>
+                    <p>The preloader used CSS3 animation system<br>
+                    <strong>CSS animated preloader</strong> <br>
+                    It's very easy to use, it have to use top of the page under the body class start. Here are some examples:</p>
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;!-- Preloader start --&gt;
+&lt;div class="site-preloader-wrap"&gt;
+	&lt;div class="sk-cube-grid"&gt;
+		&lt;div class="sk-cube sk-cube1"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube2"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube3"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube4"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube5"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube6"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube7"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube8"&gt;&lt;/div&gt;
+		&lt;div class="sk-cube sk-cube9"&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- Preloader end --&gt;
+</code>
+</pre>
+                </section>
+				
+				<section id="contact_form">
+					<div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Contact Form strong</h3>
+					</div>
+					<p>The Contact form <strong>html</strong> there have include jQuery form validation with the backend and include php file for email send system, the php email system function keeps under email.php file in the main folder, code example is as follows :</p>
+					
+<pre class="line-numbers">
+<code class="language-markup">
+&lt;div class="contact-form" data-aos="fade-up-left"&gt;
+	&lt;form id="contatc_form" method="POST" action="assets/include/sendmail.php" name="myform"&gt;
+		&lt;div class="row"&gt;
+			&lt;div class="col-sm-6"&gt;
+				&lt;div class="form-group"&gt;
+					&lt;input type="text" class="form-control" id="contact_name" name="name" placeholder="Name" required="" data-parsley-minlength="4"&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="col-sm-6"&gt;
+				&lt;div class="form-group"&gt;
+					&lt;input type="email" class="form-control" id="contact_email" name="email" placeholder="Email" required=""&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="col-sm-6"&gt;
+				&lt;div class="form-group"&gt;
+					&lt;input type="text" class="form-control" id="contact_subject" name="sub" placeholder="Subject" required="" data-parsley-minlength="4"&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="col-sm-6"&gt;
+				&lt;div class="form-group"&gt;
+					&lt;input type="text" class="form-control" id="contact_phone" name="phone" placeholder="Phone" required=""&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="col-sm-12"&gt;
+				&lt;div class="form-group"&gt;
+					&lt;textarea class="form-control" id="contact_message" name="message" rows="7" placeholder="Message" required="" data-parsley-trigger="keyup" data-parsley-minlength="10" data-parsley-maxlength="100" data-parsley-minlength-message="Come on! You need to enter at least a 10 character comment.." data-parsley-validation-threshold="10"&gt;&lt;/textarea&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+			&lt;div class="col-sm-12"&gt;
+					&lt;div id="contact_send_status"&gt;&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/div&gt;
+
+			&lt;div class="center-wrap"&gt;
+				&lt;div class="button"&gt;
+				&lt;button type="submit"&gt;Submit &lt;i class="fa fa-long-arrow-right"&gt;&lt;/i&gt;&lt;/button&gt;
+				&lt;div class="mask"&gt;&lt;/div&gt;
+			&lt;/div&gt;
+		&lt;/div&gt;
+	&lt;/form&gt;
+&lt;/div&gt;
+</code>
+</pre>
+				</section>
+				
+				<section id="">
+					<div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">AJAX Submission Form</h3>
+					</div>
+					<p>assets/include/sendmail.php file</p>
+					<img src="images/email.jpg" alt="" class="img-responsive">
+				</section>
+
+                <section id="fonts_used">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Fonts used</h3>
+                    </div>
+                    <p>By default, the template loads <strong>Poppins</strong>, <strong>Monoton</strong> font from Google Web Font Services, you can change the font with the one that suits you best.</p>
+                    <p>You will find the font code in the &quot;<strong>style.css</strong>&quot; file:</p>
+<pre class="line-numbers">
+<code class="language-css">
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Monoton');
+</code>
+</pre>
+                </section>
+                
+                <section id="credits">
+                    <div class="page-header">
+                        <h3>Credits</h3>
+                    </div>
+                    <p><strong>Note:</strong> All <strong>images</strong> are used for <strong>preview</strong> purpose only and <strong>not included</strong> in the <strong>final purchase</strong> files. </p>
+                    <p> <strong>Images from:</strong><br />
+                        <a target="_blank" href="http://freepik.com/">http://freepik.com/</a><br />
+                        <a target="_blank" href="http://pixabay.com/">http://pixabay.com/</a><br />
+                        <a target="_blank" href="http://unsplash.com/">http://unsplash.com/</a><br />
+                    </p>
+                    <p> <strong>Google Fonts:</strong><br/>
+                        <a href="https://fonts.google.com/specimen/Poppins" target="_blank">Poppins</a><br>
+						<a href="https://fonts.google.com/specimen/Monoton" target="_blank">Monoton</a><br>
+                    <p><strong>Icon Font</strong><br>
+                    <a href="https://www.flaticon.com/" target="_blank">Flaticon</a><br>
+                    <a href="http://fontawesome.io/" target="_blank">FontAwesome</a><br>
+                </section>
+                
+                <section id="supports">
+                    <div class="page-header">
+                        <h3 style="margin-top: 0; margin-bottom: 12px;">Support</h3>
+                    </div>
+   
+                    <p>If you have any questions, please use our profile contact form on Envato ( <a target="_blank" href="https://themeforest.net/user/envytheme">https://themeforest.net/user/envytheme</a> ). 
+                    <br>
+                    or send details query to support email <a href="mailto:hello@envytheme.com">hello@envytheme.com.</a>
+                    <br> <br>
+                    We aim to answer all questions within <strong>24 hours</strong> . In some cases the waiting time can be extended to <strong>48 hours.</strong></p>
+                    <p>We hope you found this document helpful. Thank you!</p>
+                </section>
+            </article>
+            <!-- END Main content --> 
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="container-fluid"> <a id="scroll-up" href="#"><i class="fa fa-angle-up"></i></a>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <p>Copyright &copy; 2019. All rights reserved by <a href="https://envytheme.com">EnvyTheme.com</a></p>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <ul class="footer-menu">
+                            <li><a href="mailto:hello@envytheme.com">Contact us</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END Footer -->
+		
+		
+		<!-- Scripts -->
+        <script src="js/other.js"></script>
+        <script src="js/custom.js"></script>
+    </body>
+</html>
