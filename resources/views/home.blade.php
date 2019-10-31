@@ -25,21 +25,30 @@
         <!-- Default Color CSS -->
         <link rel="stylesheet" href="{{ URL::asset('assets/css/color/color-default.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
-        <!-- <meta charset="UTF-8">
+        <meta charset="UTF-8">
         <title>Create Map Sample | Longdo Map</title>
         <style type="text/css">
         html {
-        height: 100%;
-        }
-        body {
-        margin: 0px;
-        height: 100%;
+            height: 100%;
         }
         #map {
-        height: 100%;
+            height: 100%;
+        }
+        #result {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            width: 1px;
+            height: 80%;
+            margin: auto;
+            border: 4px solid #dddddd;
+            background: #ffffff;
+            overflow: auto;
+            z-index: 2;
         }
         </style>
-        -->
+       
 
     </head>
   
@@ -100,10 +109,13 @@
         <div id="home" class="home-video-area" style="position: relative">
 
         
-            <video autoplay="autoplay" loop="loop" id="bgvid">
+            <!-- <video autoplay="autoplay" loop="loop" id="bgvid">
                 <source src="{{ URL::asset('assets/img/promo-video.mp4') }}" type="video/mp4">
-            </video> 
-
+            </video>  -->
+            <body onload="init();" >
+                <div id="map"></div>
+                <!-- <div id="result"></div> -->
+            </body>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -538,42 +550,198 @@
             }
         </style>
 
-        <!-- <script type="text/javascript" src="https://api.longdo.com/map/?key=adc629c890170f8bbd6067da48b59a37"></script>
+        <script type="text/javascript" src="https://api.longdo.com/map/?key=adc629c890170f8bbd6067da48b59a37"></script>
         <script>
             var map
             function init() {
                 map = new longdo.Map({
                     placeholder: document.getElementById('map')
                 });
-                map.Tags.add(function(tile, zoom) {
-                    var bound = longdo.Util.boundOfTile(map.projection(), tile);
-                    mockAjaxFromServer(bound, function(locationList) {
-                        for (var i = 0; i < locationList.length; ++i) {
-                            
-                            map.Overlays.add(new longdo.Marker(locationList[i], { visibleRange: { min: zoom, max: zoom } }));
-                            // map.Overlays.bounce(MARKER);
-                        }
-                    });
+                
+                map.zoom(17, true);//set zoom start
+                map.location({ lon:100.493936, lat:13.651267 }, true);//set lon, lat start
+                map.Layers.setBase(longdo.Layers.LONGDO_OSM);//change map
+                map.zoomRange({ min:9, max: 19});//limit zoom
+                // map.Ui.Mouse.enableClick(false);//none click mouse
+                // map.Layers.add(longdo.Layers.TRAFFIC);
+                iconmap(100.495396703481, 13.6510485748562, "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset('assets/img/icon_bus32.png') }}' alt='map'></div>'" );//icon bus
+                iconbusstop(100.495324, 13.651941, "bus-stop 1" );//icon bus-stop
+                iconbusstop(100.495041, 13.650136, "bus-stop 2" );//icon bus-stop
+                iconbusstop(100.494177, 13.649396, "bus-stop 3" );//icon bus-stop
+                iconbusstop(100.491991, 13.650224, "bus-stop 4" );//icon bus-stop
+                iconbusstop(100.493092, 13.652134, "bus-stop 5" );//icon bus-stop
+                iconbusstop(100.493964, 13.652368, "bus-stop 6" );//icon bus-stop
+                iconbusstop(100.494790, 13.653657, "bus-stop 7" );//icon bus-stop
+                iconbusstop(100.494535, 13.654025, "bus-stop 8" );//icon bus-stop
+                Route1();//map route1
+                Route2();//map route2
+            }
+
+            function iconbusstop(lon, lat, title) {
+                var bus = new longdo.Marker({ lon:lon, lat:lat },
+                {
+                    title: title,
+                    icon: {
+                        html: '<div class="bus-map"><img src="{{ URL::asset('assets/img/icon_bus-stop24.png') }}" alt="map"></div>',
+                        offset: { x: 18, y: 21 }
+                    }
                 });
-                map.zoom(17, true);
-                map.location({ lon:100.494824, lat:13.651064 }, true);
+                map.Overlays.add(bus);//set icon bus
             }
-            function dropMarker() {
-                map.Overlays.bounce(MARKER);
+            
+            function iconmap(lon, lat, title, iconbus) {
+                var bus = new longdo.Marker({ lon:lon, lat:lat },
+                {
+                    title: title,
+                    icon: {
+                        html: iconbus,
+                        offset: { x: 18, y: 21 }
+                    },
+                    popup: {
+                        html: '<div style="background: #eeeeff;">'+ title +'</div>'
+                    }
+                });
+                map.Overlays.add(bus);//set icon bus
             }
-            function mockAjaxFromServer(bound, callback) {
-                var locationList = [];
-                locationList.push({ lon:100.494824, lat:13.651064 });
-                locationList.push({ lon:100.494824, lat:13.652064 });
-                locationList.push({ lon:100.494824, lat:13.650064 });
-                locationList.push({ lon:100.495824, lat:13.651064 });
-                locationList.push({ lon:100.495824, lat:13.652064 });
-                locationList.push({ lon:100.495824, lat:13.650064 });
-                locationList.push({ lon:100.493824, lat:13.651064 });
-                locationList.push({ lon:100.493824, lat:13.652064 });
-                locationList.push({ lon:100.493824, lat:13.650064 });
-                callback(locationList);
+
+            function Route1() {
+                var polyline1 = new longdo.Polyline([
+                    { lon: 100.494121313095, lat: 13.6493661121011 },
+                    { lon: 100.494193732738, lat: 13.6494482155194 },
+                    { lon: 100.494382828474, lat: 13.6496997385120 },
+                    { lon: 100.494900494813, lat: 13.6500620354083 },
+                    { lon: 100.495179444551, lat: 13.6502718545795 },
+                    { lon: 100.495365858078, lat: 13.6505377121433 },
+                    { lon: 100.495396703481, lat: 13.6510485748562 },
+                    // { lon: 100.495360493659, lat: 13.6513404959097 },
+                    { lon: 100.495339035987, lat: 13.6520494455359 },
+                    { lon: 100.495306849479, lat: 13.6521224255235 },
+                    { lon: 100.495510697364, lat: 13.6523465782015 },
+                    { lon: 100.494936704635, lat: 13.6527844572369 },
+                    { lon: 100.494893789291, lat: 13.6528522241579 },
+                    { lon: 100.494880378246, lat: 13.6529199910594 },
+                    { lon: 100.494880378246, lat: 13.6533161664015 },
+                    { lon: 100.494829416275, lat: 13.6534803704601 },
+                    { lon: 100.494829416275, lat: 13.6535976590034 },
+                    { lon: 100.494786500930, lat: 13.6536393615825 },
+                    { lon: 100.493976473808, lat: 13.6536471808153 },
+                    { lon: 100.493327379226, lat: 13.6527740315551 },
+                    { lon: 100.493181198835, lat: 13.6523713392400 },
+                    { lon: 100.493183881044, lat: 13.6522866304131 },
+                    { lon: 100.493218749761, lat: 13.6522097408362 },
+                    { lon: 100.493222773075, lat: 13.6521862829942 },
+                    { lon: 100.493081957101, lat: 13.6520742066057 },
+                    { lon: 100.492993444204, lat: 13.6519438851567 },
+                    { lon: 100.492966622114, lat: 13.6517796800285 },
+                    { lon: 100.492961257696, lat: 13.6516558744992 },
+                    { lon: 100.492974668741, lat: 13.6499942676859 },
+                    { lon: 100.492743998765, lat: 13.6499682031720 },
+                    { lon: 100.492414087057, lat: 13.6499577773657 },
+                    { lon: 100.492258518934, lat: 13.6500203321968 },
+                    { lon: 100.492135137319, lat: 13.6501076482875 },
+                    { lon: 100.492049306631, lat: 13.6502079965906 },
+                    { lon: 100.491988956928, lat: 13.6503291964323 },
+                    { lon: 100.491551756858, lat: 13.6503135577466 },
+                    { lon: 100.491498112678, lat: 13.6502796739239 },
+                    { lon: 100.491427034139, lat: 13.6501350160108 },
+                    { lon: 100.491315722465, lat: 13.6500007838139 },
+                    { lon: 100.491858869791, lat: 13.6496358803683 },
+                    { lon: 100.492416769266, lat: 13.6492800989656 },
+                    { lon: 100.492451637983, lat: 13.6493152861612 },
+                    { lon: 100.492485165596, lat: 13.6493270152252 },
+                    { lon: 100.493150353431, lat: 13.6493348346009 },
+                    { lon: 100.494119971990, lat: 13.6493661121011 },
+                ], {
+                    title: 'Route1',
+                    detail: '-',
+                    lineWidth: 3,
+                    lineColor: 'rgba(255, 0, 0, 1.0)'
+                });
+                map.Overlays.add(polyline1); // add geometry object
             }
-        </script>  -->
+
+            function Route2() {
+                var polyline2 = new longdo.Polyline([
+                    { lon: 100.495310872793, lat: 13.6521224255235 },
+                    { lon: 100.495085567235, lat: 13.6522397147420 },
+                    { lon: 100.494917929172, lat: 13.6522749014962 },
+                    { lon: 100.494144111871, lat: 13.6522579597263 },
+                    { lon: 100.494055598974, lat: 13.6523622167524 },
+                    { lon: 100.493873208761, lat: 13.6523583071148 },
+                    { lon: 100.493724346160, lat: 13.6522566565132 },
+                    { lon: 100.493453443050, lat: 13.6522501404475 },
+                    { lon: 100.493327379226, lat: 13.6522318954626 },
+                    { lon: 100.493228137493, lat: 13.6521901926347 },
+                    { lon: 100.493081957101, lat: 13.6520742066057 },
+                    { lon: 100.492993444204, lat: 13.6519438851567 },
+                    { lon: 100.492966622114, lat: 13.6517783768128 },
+                    { lon: 100.492961257696, lat: 13.6516558744992 },
+                    { lon: 100.492808371782, lat: 13.6516676034468 },
+                    { lon: 100.492407381534, lat: 13.6516806356102 },
+                    { lon: 100.492296069860, lat: 13.6516493584169 },
+                    { lon: 100.492176711559, lat: 13.6515868040177 },
+                    { lon: 100.492080152034, lat: 13.6514877595184 },
+                    { lon: 100.492011755704, lat: 13.6513978375028 },
+                    { lon: 100.491991639137, lat: 13.6513118251080 },
+                    { lon: 100.491988956928, lat: 13.6503265899848 },
+                    { lon: 100.492049306631, lat: 13.6502066933662 },
+                    { lon: 100.492135137319, lat: 13.6501089515125 },
+                    { lon: 100.492258518934, lat: 13.6500216354223 },
+                    { lon: 100.492414087057, lat: 13.6499590805915 },
+                    { lon: 100.492743998765, lat: 13.6499695063978 },
+                    { lon: 100.492974668741, lat: 13.6499942676859 },
+                    { lon: 100.492970645427, lat: 13.6506367570414 },
+                    { lon: 100.493599623441, lat: 13.6506289377088 },
+                    { lon: 100.493704229593, lat: 13.6506224215982 },
+                    { lon: 100.493765920400, lat: 13.6505846281528 },
+                    { lon: 100.493790060281, lat: 13.6504920993472 },
+                    { lon: 100.493818223476, lat: 13.6493595959556 },
+                    { lon: 100.494115948677, lat: 13.6493674153302 },
+                    { lon: 100.494193732738, lat: 13.6494469122908 },
+                    { lon: 100.494382828474, lat: 13.6496997385120 },
+                    { lon: 100.494900494813, lat: 13.6500607321831 },
+                    { lon: 100.495179444551, lat: 13.6502705513554 },
+                    { lon: 100.495369881391, lat: 13.6505324992527 },
+                    { lon: 100.495396703481, lat: 13.6510485748562 },
+                    { lon: 100.495381834764, lat: 13.6513378894734 },
+                    { lon: 100.495343059301, lat: 13.6520481423216 },
+                    { lon: 100.495310872793, lat: 13.6521224255235 },
+                    { lon: 100.495514720678, lat: 13.6523374557129 },
+                    { lon: 100.494938045740, lat: 13.6527805476063 },
+                    { lon: 100.494895130395, lat: 13.6528496177382 },
+                    { lon: 100.494971573352, lat: 13.6528743787240 },
+                    { lon: 100.495251864194, lat: 13.6532197290440 },
+                    { lon: 100.495375245809, lat: 13.6533943588246 },
+                    { lon: 100.495348423719, lat: 13.6538035654161 },
+                    { lon: 100.495037287473, lat: 13.6539951364108 },
+                    { lon: 100.494240671396, lat: 13.6540081684457 },
+                    { lon: 100.493980497121, lat: 13.6536458776098 },
+                    { lon: 100.494787842035, lat: 13.6536380583770 },
+                    { lon: 100.494830757379, lat: 13.6535976590034 },
+                    { lon: 100.494830757379, lat: 13.6534777640474 },
+                    { lon: 100.494881719350, lat: 13.6533148631943 },
+                    { lon: 100.494881719350, lat: 13.6529186878499 },
+                    { lon: 100.494895130395, lat: 13.6528496177382 },
+                ], {
+                    title: 'Route2',
+                    detail: '-',
+                    lineWidth: 5,
+                    lineColor: 'rgba(0, 0, 0, 1.0)'
+                });
+                map.Overlays.add(polyline2); // add geometry object
+            }
+
+            
+        </script> 
+
+        <!-- <script>
+            var map;
+            function init() {
+                map = new longdo.Map({
+                    placeholder: document.getElementById('map'),
+                    language: 'th'
+                });
+            }
+        </script> -->
     </body>
 </html>
