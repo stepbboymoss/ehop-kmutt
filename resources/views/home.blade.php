@@ -107,8 +107,6 @@
 
         <!-- Start video area -->
         <div id="home" class="home-video-area" style="position: relative">
-
-        
             <!-- <video autoplay="autoplay" loop="loop" id="bgvid">
                 <source src="{{ URL::asset('assets/img/promo-video.mp4') }}" type="video/mp4">
             </video>  -->
