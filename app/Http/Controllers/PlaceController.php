@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\detail;
+use App\Place;
 
 class PlaceController extends Controller
 {
@@ -14,7 +14,8 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $places=Place::all()->toArray();
+        return view('home',compact('places'));
     }
 
     /**
@@ -41,7 +42,7 @@ class PlaceController extends Controller
             'name' => $request ->get('name'),
             'detail' => $request ->get('detail')
         ]);
-        $detail -> save();
+        $place -> save();
         return redirect()->route('place.create')->with('success','บันทึกสำเร็จ');
     }
 
@@ -53,7 +54,8 @@ class PlaceController extends Controller
      */
     public function show($id)
     {
-        //
+        $place = Place::find($id);
+        return view('place.show', compact('place'));
     }
 
     /**
@@ -87,6 +89,8 @@ class PlaceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $place = Place::find($id);
+        $place->delete();
+        return redirect()->route('place.index')->with('success','ลบข้อมูลสำเร็จ');
     }
 }
