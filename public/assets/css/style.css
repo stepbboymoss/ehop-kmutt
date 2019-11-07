@@ -2212,3 +2212,81 @@ h3,h2{
     background-size: cover;
     background-position: center;
   }
+
+  .bus-map{
+    height:100px;
+    width:100px;
+}
+
+@media only screen and (max-width: 567px){
+    .text-box{
+        position: absolute;
+        top: 10px;
+        width: 350px;
+        height: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fe5619;
+        padding: 1rem;
+    }
+    .form-toggle{
+        padding-top: 0.5rem;
+        display: none;
+    }
+}
+@media only screen and (min-width: 568px) and (max-width: 1199px){
+    .text-box{
+        position: absolute;
+        top: 4%;
+        width: 350px;
+        height: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fe5619;
+        padding: 1rem;
+    }
+    .form-toggle{
+        padding-top: 0.5rem;
+        display: none;
+    }
+}
+@media only screen and (min-width: 1200px){
+    .text-box{
+        position: absolute;
+        top: 50%;
+        width: 350px;
+        height: auto;
+        right: 10%;
+        transform: translate(-15%,-50%);
+        background: #fe5619;
+        padding: 1rem;
+    }
+    #form-toggle{
+        display: none !important;
+    }
+}
+
+.text-box select{
+    width: 100%;
+    padding: 0.25rem;
+    border-radius: 8px;
+}
+
+.text-box label{
+    color: white;
+}
+
+@media only screen and (min-width: 1200px){
+    .form-toggle{
+        display: block !important;
+        padding: 1.25rem 1rem;
+    }
+}
+
+#form-toggle{
+    cursor: pointer;
+    display: block;
+    color: white;
+    text-align: center;
+}
+
