@@ -7,8 +7,11 @@ h2, a:focus {
 }
 .button, .center-wrap button button {
 	border: 1px solid #fe5619;
-    background-color: #fe5619;
+	background-color: #fe5619;
+	font-size: 15px;
 }
+
+
 .plan .button:hover {
 	border-color: #fe5619;
 }
@@ -28,12 +31,12 @@ h2, a:focus {
 	background-color: #e74c14 !important;
 }
 .navbar-light.fixed-top, .search-modal, .home-video-area::before, .owl-thumb-item.active .slide-service-item, .owl-thumb-item:hover .slide-service-item {
-    background-color: #fe5619;
+    background-color: #ffb700;
 }
 .home-video-area::before {
     background-color: #fe56191a;
 }
-#fe5619;
+
 .filter-menu ul li.active,  .filter-menu ul li:hover {
 	background-color: #fe5619;
 }

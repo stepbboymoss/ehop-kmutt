@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="author" content="EnvyTheme">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>KMUTT e-Bus | Web App for KMUTT e-Bus shuttle Service</title>
         <!-- Bootstrap CSS -->
         <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -25,6 +26,7 @@
         <!-- Default Color CSS -->
         <link rel="stylesheet" href="{{ URL::asset('assets/css/color/color-default.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="{{ URL::asset('assets/img/bus-and-wifi-signal.png') }}">
         <meta charset="UTF-8">
         <title>Create Map Sample | Longdo Map</title>
         <style type="text/css">
@@ -52,7 +54,7 @@
 
     </head>
   
-    <body data-spy="scroll" data-offset="70" data-terget="#home" style="font-family: 'Kanit', sans-serif;" onload="init();"s>
+    <body data-spy="scroll" data-offset="70" data-terget="#home" style="font-family: 'Kanit', sans-serif;" onload="init('','','');">
   
         <!-- Preloader start -->
         <div class="site-preloader-wrap">
@@ -73,7 +75,7 @@
         <!-- Start Main Header -->
 		<nav class="navbar navbar-expand-md navbar-light">
 			<div class="container">
-				<a class="navbar-brand logo" href="home"><img src="{{ URL::asset('assets/img/logo.png') }}" alt="Logo"></a>
+				<a class="navbar-brand logo" href="home"><img class="scale-img" src="{{ URL::asset('assets/img/logo1.png') }}" alt="Logo"></a>
 				<a class="navbar-brand logo-2" href="home"><img class="img-responsive" src="{{ URL::asset('assets/img/logo2.png') }}" alt="Logo"></a>  
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -104,64 +106,86 @@
 			</div>
 		</nav>
         <!-- End Main Header -->
-
+        
         <!-- Start video area -->
         <div id="home" class="home-video-area" style="position: relative">
-            <!-- <video autoplay="autoplay" loop="loop" id="bgvid">
-                <source src="{{ URL::asset('assets/img/promo-video.mp4') }}" type="video/mp4">
-            </video>  -->
-            
-
-
-          
-            <!-- <body onload="init();" > -->
-                
-                <div id="map" style="position: relative;">
+            <div id="map" style="position: relative;">
                 </div>
                 <div class="text-box">
-                    <span id="form-toggle"> <i class="fa fa-search"></i> ไปไหนดี?</span>
+                    <span id="form-toggle" class="d-block d-xl-none heading-form-mobile"> <i class="fa fa-search"></i> ไปไหนดี?</span>
+                    <span class="d-none d-xl-block heading-form heading-form-mobile"> <i class="fa fa-search"></i> ไปไหนดี?</span>
                     <div class="form-toggle">
-                        <label for="">
-                            จุดเริ่มต้น
-                        </label>
-                        <select name="" id="">
-                            <option value="1">CB1</option>
-                            <option value="2">หอสมุด</option>
-                            <option value="3">ตึกอธิการ</option>
-                        </select>
-                        <label for="">
-                            จุดเริ่มต้น
-                        </label>
-                        <select name="" id="">
-                            <option value="1">CB1</option>
-                            <option value="2">หอสมุด</option>
-                            <option value="3">ตึกอธิการ</option>
-                        </select>
-                        <label for="">
-                            จุดเริ่มต้น
-                        </label>
-                        <select name="" id="">
-                            <option value="1">CB1</option>
-                            <option value="2">หอสมุด</option>
-                            <option value="3">ตึกอธิการ</option>
-                        </select>
-                        <label for="">
-                            จุดเริ่มต้น
-                        </label>
-                        <select name="" id="">
-                            <option value="1">CB1</option>
-                            <option value="2">หอสมุด</option>
-                            <option value="3">ตึกอธิการ</option>
-                        </select>
-                        <label for="">
-                            จุดเริ่มต้น
-                        </label>
-                        <select name="" id="">
-                            <option value="1">CB1</option>
-                            <option value="2">หอสมุด</option>
-                            <option value="3">ตึกอธิการ</option>
-                        </select>
-                        
+                        <form id="send_data1" name="form1_test" method="post" >
+                            <div id="success" class="alert success">
+                                <span class="closebtn">&times;</span>  
+                                <strong>Success!</strong>
+                            </div>
+                            <div id="fail" class="alert">
+                                <span class="closebtn">&times;</span>  
+                                <strong>Fail!</strong>
+                            </div>
+                            <label for="">
+                                จุดเริ่มต้น
+                            </label>
+                            <select name="input1" id="list-distance1">
+                                <option value="">เริ่มจากที่ไหน...</option>
+                                <option value="3" id="distance1-val3">จุดจอดท่ารถ มจธ. (จุดจอดที่ 1)</option>
+                                <option value="4" id="distance1-val4">ประตูทางเข้าโรงเรียนดรุณสิกขาลัย (จุดจอดที่ 2)</option>
+                                <option value="5" id="distance1-val5">ประตูทางเข้าอาคารหอพักนักศึกษาหญิง (จุดจอดที่ 3)</option>
+                                <option value="6" id="distance1-val6">ด้านหน้าอาคารเรียนรวม 3 (จุดจอดที่ 4)</option>
+                                <option value="7" id="distance1-val7">ด้านหน้าอาคารอเนกประสงค์ (จุดจอดที่ 5)</option>
+                                <option value="8" id="distance1-val8">ด้านหน้าอาคารสำนักหอสมุด (จุดจอดที่ 6)</option>
+                                <option value="9" id="distance1-val9">ด้านหน้าอาคารปฏิบัติการพื้นฐานทางวิทยาศาสตร์ (จุดจอดที่ 7)</option>
+                                <option value="10" id="distance1-val10">ประตูทางเข้าสถาบันวิทยาการหุ่นยนต์ภาคสนาม (จุดจอดที่ 8)</option>
+
+                                <option value="1" id="distance1-val1">Route1</option>
+                                <option value="2" id="distance1-val2">Route2</option>
+                            </select>
+                            <label for="">
+                                เป้าหมาย
+                            </label>
+                            <select name="input2" id="list-distance2">
+                                <option value="">ไปที่ไหนดี...</option>
+                                <option value="3" id="distance2-val3">จุดจอดท่ารถ มจธ. (จุดจอดที่ 1)</option>
+                                <option value="4" id="distance2-val4">ประตูทางเข้าโรงเรียนดรุณสิกขาลัย (จุดจอดที่ 2)</option>
+                                <option value="5" id="distance2-val5">ประตูทางเข้าอาคารหอพักนักศึกษาหญิง (จุดจอดที่ 3)</option>
+                                <option value="6" id="distance2-val6">ด้านหน้าอาคารเรียนรวม 3 (จุดจอดที่ 4)</option>
+                                <option value="7" id="distance2-val7">ด้านหน้าอาคารอเนกประสงค์ (จุดจอดที่ 5)</option>
+                                <option value="8" id="distance2-val8">ด้านหน้าอาคารสำนักหอสมุด (จุดจอดที่ 6)</option>
+                                <option value="9" id="distance2-val9">ด้านหน้าอาคารปฏิบัติการพื้นฐานทางวิทยาศาสตร์ (จุดจอดที่ 7)</option>
+                                <option value="10" id="distance2-val10">ประตูทางเข้าสถาบันวิทยาการหุ่นยนต์ภาคสนาม (จุดจอดที่ 8)</option>
+                            </select>
+                            
+                            <div id="list-route">
+                                <label for="">
+                                    เส้นทาง
+                                </label>
+                                <select name="input3" id="list-distance3">
+                                    <option value="">ไปเส้นทางไหนดี...</option>
+                                    <option value="1" id="distance3-val1">Route1</option>
+                                    <option value="2" id="distance3-val2">Route2</option>
+                                </select>
+                            </div>
+                            <div id="cal-time" style="display:none">
+                                <span class="d-block val-time" >
+                                    <div id="value-time">
+                                        0 min
+                                    </div>
+                                </span>
+                            </div>
+                            <!-- <h1>01 min</h1> -->
+                            <!-- <div class="date-box">
+                                01 min
+                            </div> -->
+                            <div class="center-wrap mt-4">
+                                <div class="button">
+                                    <div class="button_submit">
+                                        <button type="submit">Submit <i class="fa fa-long-arrow-right"></i></button>
+                                        <div class="mask"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 
@@ -184,7 +208,7 @@
         <!-- End video area -->
 
 
-
+        
 
 
 
@@ -218,10 +242,9 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 text-center">
                         <div class="section-title">
-                            <h2>KMUTT E-BUS ROUTE <span id="distance"></span></h2>
+                            <h2>KMUTT E-BUS ROUTE </h2>
+                            <!-- <span id="distance"></span> -->
                             <p>ให้บริการภายในมหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี (วิทยาเขตบางมด) โดยแบ่งเป็น 2 เส้นทาง คือ</p>
-                            <p>* หมายเหตุ KMUTT e-Bus ให้บริการในวัน จันทร์ - ศุกร์ เวลา 07.30 น. - 18.30 น.
-                                สถานะ : เว็บไซต์ยังไม่เปิดให้บริการ</p>
                             <span class="section-title-bg">Stations</span>
                         </div>
                     </div>
@@ -237,7 +260,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" id="headingOne">
                                     <h4 class="panel-title">
-                                        <a role="button"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        <a role="button"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
                                             ROUTE 1 : เส้นทางวนซ้าย
                                         </a>
                                     </h4>
@@ -265,7 +288,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" id="headingTwo">
                                     <h4 class="panel-title">
-                                        <a role="button"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                        <a role="button"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" class="collapsed">
                                             ROUTE 2 : เส้นทางวนขวา
                                         </a>
                                     </h4>
@@ -281,7 +304,7 @@
                                                 <li><a data-toggle="modal" data-target="#exampleModal">ด้านหน้าอาคารสำนักหอสมุด (จุดจอดที่ 6)</a></li>
                                                 <li><a data-toggle="modal" data-target="#exampleModal">ด้านหน้าอาคารอเนกประสงค์ (จุดจอดที่ 5)</a></li>
                                                 <li><a data-toggle="modal" data-target="#exampleModal">ด้านหน้าอาคารเรียนรวม 3 (จุดจอดที่ 4)</a></li>
-                                                <li><a data-toggle="modal" data-target="#exampleModal">ประตูทางเข้าอาคารหอพักนักศึกษาหญิง (จุดจอดที่ 3))</a></li>
+                                                <li><a data-toggle="modal" data-target="#exampleModal">ประตูทางเข้าอาคารหอพักนักศึกษาหญิง (จุดจอดที่ 3)</a></li>
                                                 <li><a data-toggle="modal" data-target="#exampleModal">จุดจอดท่ารถ มจธ. (จุดจอดที่ 1)</a></li>
                                             </h6>
                                         </ul>
@@ -289,6 +312,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <p>* หมายเหตุ KMUTT e-Bus ให้บริการในวัน จันทร์ - ศุกร์ เวลา 07.30 น. - 18.30 น.สถานะ : เว็บไซต์ยังไม่เปิดให้บริการ</p>
                     </div>
                 </div>
             </div>
@@ -325,8 +351,8 @@
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 text-center">
                         <div class="section-title">
-                            <h2>KMUTT E-BUS ROUTE</h2>
-                            <p>ตรวจสอบตำแหน่งของรถ KMUTT e-Bus แบบ realtime เพื่อการรอคอยอย่างมีจุดหมาย</p>
+                            <h2>Web App for KMUTT e-Bus Shuttle Service</h2>
+                            <p>เพื่อความสะดวกสบายของผู้ใช้บริการ KMUTT e-Bus</p>
                             <span class="section-title-bg">About</span>
                         </div>
                     </div>
@@ -375,7 +401,7 @@
                             <a href="https://vimeo.com/90691438" class="plus popup-youtube"></a>
                         </div>
                         <h2 data-parallax='{"z": -400}'>Watch Video</h2>
-                        <p data-parallax='{"z": -200}'>muda muda muda muda muda muda muda muda muda</p>
+                        <p data-parallax='{"z": -200}'>ตรวจสอบตำแหน่งของรถ KMUTT e-Bus แบบ realtime เพื่อการรอคอยอย่างมีจุดหมาย</p>
                     </div>
                 </div>
             </div>
@@ -557,14 +583,14 @@
                     <div class="modal-body">
                         <div class="col-md-12 col-lg-12">
                             <div class="blog-item">
-                                <div class="image-modal" style="background-image:url('assets/img/stop1.jpg') ">
+                                <div class="image-modal" style="background-image:url('assets/img/stop2.jpg') ">
                                 </div>
                                 <div class="blog-info">
                                     <div class="date-box">
                                         <span class="month">จุดจอด</span> 01 
                                     </div>
                                     <div class="title-meta">
-                                        <h3>{{$place['name']}}</h3>
+                                        <h3>111</h3>
                                     </div>
                                 </div>
                                 <div class="post-content">
@@ -606,6 +632,56 @@
         <!-- Active JS -->
         <script src="{{ URL::asset('assets/js/active.js') }}"></script>
         <script>
+            $('#send_data1').submit(function(event){
+                var one = $("#list-distance1").val();
+                var two = $("#list-distance2").val();
+                var three = $("#list-distance3").val();
+                init("","","");
+                $("#fail").css("opacity","1");
+                $("#success").css("opacity","1");
+                $("#fail").css("display","none");
+                $("#success").css("display","none");
+                $("#cal-time").css("display","none");
+                if(one == ""){//ช่อง 1 ว่าง
+                    // alert('Please input value');
+                    $("#fail").css("display","block");
+                }else if(two == ""){//ช่อง 2 ว่าง
+                    // alert('Please input value'); 
+                    $("#fail").css("display","block"); 
+                }else if(three == ""){//ช่อง 3 ว่าง
+                    if(one == "1" || one == "2"){
+                        $("#cal-time").css("display","block");
+                        $("#success").css("display","block");
+                        init(one,two,three);
+                    }else{
+                        // alert('Please input value');
+                        $("#fail").css("display","block");
+                    }
+                }else if(one == two){//ช่อง 1=2
+                    // alert('จุดขึ้นลงเป็นค่าเดียวกัน'); 
+                    $("#fail").css("display","block");
+                }else if(three == "1"){//Route1 ทางไม่ผ่าน
+                    if(one-2 == "6" || one-2 == "8" || two-2 == "6" || two-2 == "8"){
+                        // alert('ไม่ผ่านทางนี้');  
+                        $("#fail").css("display","block");
+                    }else{
+                        $("#cal-time").css("display","block");
+                        $("#success").css("display","block");
+                        init(one,two,three);
+                    }
+                }else if(three == "2"){//Route2 ทางไม่ผ่าน
+                    if(two == "" ){
+                        // alert('ไม่ผ่านทางนี้');
+                        $("#fail").css("display","block");
+                    }else{
+                        $("#cal-time").css("display","block");
+                        $("#success").css("display","block");
+                        init(one,two,three);
+                    }
+                }
+                return false;
+            });
+
         // WITH BUTTONS
             $(".scrolldown").click(function() {
                 $('html, body').animate({
@@ -641,6 +717,119 @@
             });
         </script>
 
+        <script>
+            var route1=[6,8];
+            var route2=[];
+            var val1;
+            var val2;
+            var val3;
+            $(document).ready(function () {
+                $("#list-distance1").change(function () {//เลือกช่อง1
+                    start_list();
+                    var val = $(this).val();
+                    val1 = val;
+                    filter_data();
+                });
+                
+                $("#list-distance2").change(function () {//เลือกช่อง2
+                    start_list();
+                    var val = $(this).val();
+                    val2 = val;
+                    filter_data();
+                });
+
+                $("#list-distance3").change(function () {//เลือกช่อง3
+                    start_list();
+                    var val = $(this).val();
+                    val3 = val;
+                    filter_data();
+                });
+            });
+
+            function filter_data(){
+                if (val1 == "1" ) {//ปิดจุดลงเส้นทางที่ไม่ผ่าน route1
+                    $("#list-route").css("display","none");
+                    for (var i = 0; i < route1.length; ++i) {
+                        $("#distance1-val"+(route1[i]+2)).css("display","none");
+                        $("#distance2-val"+(route1[i]+2)).css("display","none");
+                    }
+                }else if (val1 == "2" ) {//ปิดจุดลงเส้นทางที่ไม่ผ่าน route2
+                    $("#list-route").css("display","none");
+                    for (var i = 0; i < route2.length; ++i) {
+                        $("#distance1-val"+(route2[i]+2)).css("display","none");
+                        $("#distance2-val"+(route2[i]+2)).css("display","none");
+                    }
+                }
+
+                if (val3 == "1" ) {//ปิดจุดลงเส้นทางที่ไม่ผ่าน route1
+                    for (var i = 0; i < route1.length; ++i) {
+                        $("#distance1-val"+(route1[i]+2)).css("display","none");
+                        $("#distance2-val"+(route1[i]+2)).css("display","none");
+                    }
+                    $("#distance1-val1").css("display","none");
+                }else if (val3 == "2" ) {//ปิดจุดลงเส้นทางที่ไม่ผ่าน route2
+                    for (var i = 0; i < route2.length; ++i) {
+                        $("#distance1-val"+(route2[i]+2)).css("display","none");
+                        $("#distance2-val"+(route2[i]+2)).css("display","none");
+                    }
+                    $("#distance1-val2").css("display","none");
+                }
+
+                for (var i = 0; i < route1.length; ++i) {//ปิดเส้นทางที่ไม่ผ่าน route1
+                    if (val1 == route1[i]+2 ) {
+                        $("#distance3-val1").css("display","none");
+                    }
+                    if (val2 == route1[i]+2 ) {
+                        $("#distance3-val1").css("display","none");
+                        $("#distance1-val1").css("display","none");
+                        console.log(val2);
+                    }
+                }
+
+                for (var i = 0; i < route2.length; ++i) {//ปิดเส้นทางที่ไม่ผ่าน route2
+                    if (val1 == route2[i]+2 ) {
+                        $("#distance3-val2").css("display","none");
+                    }
+                    if (val2 == route2[i]+2 ) {
+                        $("#distance3-val2").css("display","none");
+                        $("#distance1-val2").css("display","none");
+                    }
+                }
+
+                $("#distance1-val"+val1).css("display","none");//ตัดตัวซ้ำ
+                $("#distance2-val"+val1).css("display","none");//ตัดตัวซ้ำ
+                $("#distance1-val"+val2).css("display","none");//ตัดตัวซ้ำ
+                $("#distance2-val"+val2).css("display","none");//ตัดตัวซ้ำ
+            }
+
+            function start_list(){
+                $("#distance1-val1").css("display","block");
+                $("#distance1-val2").css("display","block");
+                $("#distance1-val3").css("display","block");//1
+                $("#distance1-val4").css("display","block");//2
+                $("#distance1-val5").css("display","block");//3
+                $("#distance1-val6").css("display","block");//4
+                $("#distance1-val7").css("display","block");//5
+                $("#distance1-val8").css("display","block");//6
+                $("#distance1-val9").css("display","block");//7
+                $("#distance1-val10").css("display","block");//8
+
+                $("#distance2-val3").css("display","block");//1
+                $("#distance2-val4").css("display","block");//2
+                $("#distance2-val5").css("display","block");//3
+                $("#distance2-val6").css("display","block");//4
+                $("#distance2-val7").css("display","block");//5
+                $("#distance2-val8").css("display","block");//6
+                $("#distance2-val9").css("display","block");//7
+                $("#distance2-val10").css("display","block");//8
+
+                $("#distance3-val1").css("display","block");
+                $("#distance3-val2").css("display","block");
+
+                $("#list-route").css("display","block");
+            }
+        </script>
+
         <script type="text/javascript" src="https://api.longdo.com/map/?key=adc629c890170f8bbd6067da48b59a37"></script>
         <script type="text/javascript">
             var map
@@ -654,16 +843,26 @@
             var bus_track=[];
             var speed;
             var route_dest=[];
-                
-            function init() {
+            var bus_now=[];
+            
+            function init(one, two, three) {
                 map = new longdo.Map({
                     placeholder: document.getElementById('map')
                 });
-                
+
+                var result1 = map.location();//ตำแหน่งตรงกลางของแมพใช้ตอนเพิ่มจุด
+                var result2 = map.location(longdo.LocationMode.Pointer);//ตำแหน่งเม้าของแมพใช้ตอนเพิ่มจุด
+                console.log(result1);
+                console.log(result2);
+
                 map.zoom(17, true);//set zoom start
-                map.location({ lon:100.493936, lat:13.651267 }, true);//set lon, lat start
+                map.location({ lon: 100.493493, lat: 13.651804 }, true);//set lon, lat start
                 map.Layers.setBase(longdo.Layers.LONGDO_OSM);//change map
-                map.zoomRange({ min:9, max: 19});//limit zoom
+                map.zoomRange({ min:15, max: 19});//limit zoom
+                map.Ui.Crosshair.visible(false);
+                // map.zoom(true, true);//Zoom in
+                // map.zoom(false, true);//Zoom out
+                // map.location(longdo.LocationMode.Geolocation);//ไปยังตำแหน่งปัจจุบัน
                 // map.Ui.Mouse.enableClick(false);//none click mouse
                 // map.Layers.add(longdo.Layers.TRAFFIC);
                 iconbusstop(100.495324, 13.651941, "bus-stop 1" );//icon bus-stop
@@ -674,22 +873,41 @@
                 iconbusstop(100.493964, 13.652368, "bus-stop 6" );//icon bus-stop
                 iconbusstop(100.494790, 13.653657, "bus-stop 7" );//icon bus-stop
                 iconbusstop(100.494535, 13.654025, "bus-stop 8" );//icon bus-stop
-                dest1 = iconbus(100.495594703481, 13.6514385748562, 1, 7, "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset('assets/img/icon_bus32.png') }}' alt='map'></div>'" );//icon bus  
-                // dest2 = iconbus(100.495594703481, 13.6514385748562, 2, 1, "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset('assets/img/icon_bus32.png') }}' alt='map'></div>'" );//icon bus  
-                // console.log(dest1);
+                
+                var position_start = one;
+                var station = two-2;
+                var route = three;
+
+                dest1 = iconbus(100.495594703481, 13.6514385748562, "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset('assets/img/icon_bus.png') }}' alt='map'></div>'" );//icon bus  
+                iconnow(100.493493, 13.651804 );//icon now  
+                value_route_bus();
+                if (position_start == 1 ){
+                    dest = distance(poly1, bus_track[0], station, 1);  
+                }else if (position_start == 2){
+                    dest = distance(poly2, bus_track[0], station, 2);  
+                }
+                else{
+                    if (route == 1 ){
+                        dest = distance(poly1, bus_stop[position_start-3], station, 1);  
+                    }else if (route == 2){
+                        dest = distance(poly2, bus_stop[position_start-3], station, 2);  
+                    }
+                }
                 $('#distance').text(dest);
+                $("#value-time").html(Math.ceil(dest)+" min");
+                dest = 0;
+                Math.ceil(4.4);
                 Route1();//map route1
                 Route2();//map route2
+                
             }
 
             function distance(poly, bus_track, point_stop, route) {
                 var point_start;
                 var dest_old=100000;
                 for (var i = 0; i < poly.length; ++i) {//คำนวนจุดรถถึงจุดในเส้น
-                    MarkerCar1 = new longdo.Marker(poly[i], {draggable: true});
-                    MarkerCar2 = new longdo.Marker(bus_track[0], {draggable: true});
-                    // map.Overlays.add(MarkerCar1);
-                    // map.Overlays.add(MarkerCar2);
+                    MarkerCar1 = new longdo.Marker(poly[i], {draggable: false});
+                    MarkerCar2 = new longdo.Marker(bus_track, {draggable: false});
                     cal_distance();
                     var dest_new = displacementResult;
                     if (dest_old > dest_new){
@@ -697,35 +915,48 @@
                         point_start = i;
                     }
                 }
-                route_dest.push(bus_track[0]);
+                route_dest.push(bus_track);
 
-                for (var i = point_start+1; i < poly.length; ++i) {//คำนวนจุดในเส้นถึงเป้าหมาย
+                for (var i = point_start+1; i <= poly.length; ++i) {//คำนวนจุดในเส้นถึงเป้าหมาย
                     if (poly[i]==bus_stop[point_stop-1]){
                         break;
                     }
-                    MarkerCar1 = new longdo.Marker(poly[i], {draggable: true});
-                    MarkerCar2 = new longdo.Marker(poly[i+1], {draggable: true});
+                    if (i>=50){
+                        if (route==1){
+                            i=0;
+                        }
+                    }
+                    if (i>=71){
+                        if (route==2){
+                            i=0;
+                        }   
+                    }
+                    MarkerCar1 = new longdo.Marker(poly[i], {draggable: false});
+                    if (i>=50){
+                        if (route==1){
+                            i=0;
+                        }
+                    }
+                    if (i>=71){
+                        if (route==2){
+                            i=0;
+                        }   
+                    }
+                    MarkerCar2 = new longdo.Marker(poly[i+1], {draggable: false});
                     // map.Overlays.add(MarkerCar1);
                     // map.Overlays.add(MarkerCar2);
                     cal_distance();
                     dest = dest + displacementResult;
                     route_dest.push(poly[i]);
-                    if (i>=49){
-                        if (route==1){
-                            i=0;
-                        }
-                    }
-                    if (i>=70){
-                        if (route==2){
-                            i=0;
-                        }   
-                    }
+                    
                 }
                 route_dest.push(poly[i]);
-                map.Overlays.add(MarkerCar2);
+                // map.Overlays.add(MarkerCar2);
+                map.Overlays.bounce(MarkerCar2);
                 dest = (60*(dest+dest_old))/(speed*1000);
                 line(route_dest);
                 route_dest=[];
+                bus_track=[];
                 return dest;
             }
 
@@ -742,16 +973,17 @@
                 {
                     title: title,
                     icon: {
-                        html: '<div class="bus-map"><img src="{{ URL::asset('assets/img/icon_bus-stop24.png') }}" alt="map"></div>',
+                        html: '<div class="bus-map"><img src="{{ URL::asset('assets/img/icon_bus-stop.png') }}" alt="map"></div>',
                         offset: { x: 18, y: 21 }
                     },
-                    detail: 'Route1: ' + dest + 'เส้นทาง <br> Route2: ' + dest + 'เส้นทาง' ,
+                    // detail: 'Route1: ' + dest + 'เส้นทาง <br> Route2: ' + dest + 'เส้นทาง' ,
+                    detail: ' ',
                 });
                 map.Overlays.add(bus);//set icon bus
             }
 
-            function iconbus(lon, lat, route, station, title, iconbus) {//icon bus
-                bus_track.push ({ lon: lon, lat: lat });//เก็บค่าตำแหน่งของbus
+            function iconbus(lon, lat, title, iconbus) {//icon bus
+                bus_track.push({ lon: lon, lat: lat });///เก็บค่าตำแหน่งของbus
                 var bus = new longdo.Marker({ lon:lon, lat:lat },
                 {
                     title: title,
@@ -759,19 +991,21 @@
                         html: iconbus,
                         offset: { x: 18, y: 21 }
                     },
-                    popup: {
-                        html: '<div style="background: #eeeeff;">'+ title +'</div>'
-                    }
+                    detail: ' '
                 });
                 map.Overlays.add(bus);//set icon bus
-                value_route_bus();
-                if (route==1){
-                    return distance(poly1, bus_track, station, route);
-                }
-                if (route==2){
-                    return distance(poly2, bus_track, station, route);
-                }
-                dest = 0;
+            }
+
+            function iconnow(lon, lat) {//icon bus stop
+                bus_now.push({ lon: lon, lat: lat });//เก็บค่าตำแหน่งของคน
+                var now = new longdo.Marker({ lon:lon, lat:lat },
+                {
+                    icon: {
+                        html: '<div class="bus-map"><img src="{{ URL::asset('assets/img/icon_bus-stop.png') }}" alt="map"></div>',
+                        offset: { x: 18, y: 21 }
+                    },
+                });
+                map.Overlays.add(now);//set icon bus
             }
 
             function line(route_dest) {//เส้นปะไปยังเป้าหมาย
@@ -779,7 +1013,7 @@
                     // title: 'Dashline',
                     // detail: '-',
                     lineWidth: 5,
-                    lineColor: 'rgba(255, 255, 0, 1.0)',
+                    lineColor: 'rgba(0, 0, 255, 1.0)',
                     lineStyle: longdo.LineStyle.Dashed
                     // pointer: true
                 });
@@ -787,7 +1021,7 @@
             }
 
             function value_route_bus(){//วาดเส้นทางวนรถของเส้นทางที่1และ2
-                speed=30;
+                speed=20;
                 //route 1
                 poly1.push({ lon: 100.495339035987, lat: 13.6520494455359 });
                 poly1.push( bus_stop[0]);
@@ -973,7 +1207,7 @@
                     title: 'Route1',
                     detail: '-',
                     lineWidth: 3,
-                    lineColor: 'rgba(0, 0, 0, 1.0)'
+                    lineColor: 'rgba(255, 130, 0, 1.0)'//สีส้ม
                 });
                 map.Overlays.add(polyline1); // add geometry object
             }
@@ -1054,12 +1288,25 @@
                 ], {
                     title: 'Route2',
                     detail: '-',
-                    lineWidth: 5,
-                    lineColor: 'rgba(255, 0, 0, 1.0)'
+                    lineWidth: 6,
+                    lineColor: 'rgba(255, 210, 30, 1.0)'//สีเหลือง
                 });
                 map.Overlays.add(polyline2); // add geometry object
             }
             
+        </script>
+
+        <script>
+            var close = document.getElementsByClassName("closebtn");
+            var i;
+
+            for (i = 0; i < close.length; i++) {
+                close[i].onclick = function(){
+                    var div = this.parentElement;
+                    div.style.opacity = "0";
+                    setTimeout(function(){ div.style.display = "none"; }, 600);
+                }
+            }
         </script>
     </body>  
 </html>
