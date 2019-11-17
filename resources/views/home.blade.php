@@ -27,34 +27,33 @@
         <link rel="stylesheet" href="{{ URL::asset('assets/css/color/color-default.css') }}">
         <link href="https://fonts.googleapis.com/css?family=Kanit&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="{{ URL::asset('assets/img/bus-and-wifi-signal.png') }}">
-        <meta charset="UTF-8">
         <title>Create Map Sample | Longdo Map</title>
         <style type="text/css">
-        html {
-            height: 100%;
-        }
-        #map {
-            height: 100%;
-        }
-        #result {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            right: 0;
-            width: 1px;
-            height: 80%;
-            margin: auto;
-            border: 4px solid #dddddd;
-            background: #ffffff;
-            overflow: auto;
-            z-index: 2;
-        }
+            html {
+                height: 100%;
+            }
+            #map {
+                height: 100%;
+            }
+            #result {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                width: 1px;
+                height: 80%;
+                margin: auto;
+                border: 4px solid #dddddd;
+                background: #ffffff;
+                overflow: auto;
+                z-index: 2;
+            }
         </style>
        
 
     </head>
   
-    <body data-spy="scroll" data-offset="70" data-terget="#home" style="font-family: 'Kanit', sans-serif;" onload="init('','','');">
+    <body data-spy="scroll" data-offset="70" data-terget="#home" style="font-family: 'Kanit', sans-serif;" onload="init('','','','1'); myStartFunction();">
   
         <!-- Preloader start -->
         <div class="site-preloader-wrap">
@@ -114,16 +113,20 @@
                 <div class="text-box">
                     <span id="form-toggle" class="d-block d-xl-none heading-form-mobile"> <i class="fa fa-search"></i> ไปไหนดี?</span>
                     <span class="d-none d-xl-block heading-form heading-form-mobile"> <i class="fa fa-search"></i> ไปไหนดี?</span>
+                    <!-- <p id="demo"></p>
+
+                    <button onclick="myStopFunction()">Stop time</button> -->
+
                     <div class="form-toggle">
                         <form id="send_data1" name="form1_test" method="post" >
-                            <div id="success" class="alert success">
+                            <!-- <div id="success" class="alert success">
                                 <span class="closebtn">&times;</span>  
                                 <strong>Success!</strong>
                             </div>
                             <div id="fail" class="alert">
                                 <span class="closebtn">&times;</span>  
                                 <strong>Fail!</strong>
-                            </div>
+                            </div> -->
                             <label for="">
                                 จุดเริ่มต้น
                             </label>
@@ -138,8 +141,8 @@
                                 <option value="9" id="distance1-val9">ด้านหน้าอาคารปฏิบัติการพื้นฐานทางวิทยาศาสตร์ (จุดจอดที่ 7)</option>
                                 <option value="10" id="distance1-val10">ประตูทางเข้าสถาบันวิทยาการหุ่นยนต์ภาคสนาม (จุดจอดที่ 8)</option>
 
-                                <option value="1" id="distance1-val1">Route1</option>
-                                <option value="2" id="distance1-val2">Route2</option>
+                                <option value="1" id="distance1-val1">รถรับส่งเส้นทางที่1</option>
+                                <option value="2" id="distance1-val2">รถรับส่งเส้นทางที่2</option>
                             </select>
                             <label for="">
                                 เป้าหมาย
@@ -166,10 +169,49 @@
                                     <option value="2" id="distance3-val2">Route2</option>
                                 </select>
                             </div>
-                            <div id="cal-time" style="display:none">
+                            <div class="center-wrap mt-4">
+                                <div class="button">
+                                    <div class="button_submit">
+                                        <button type="submit">ค้นหาเส้นทาง <i class="fa fa-long-arrow-right"></i></button>
+                                        <div class="mask"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- 222222222222222222222222222222222222222222222222 -->
+                        <form class= "class_send_data2" id="send_data2" name="form2_test" method="post" >
+                            <label class="form-toggle-name">
+                                เส้นทาง: 
+                            </label>
+                            <br>
+                            <span class="d-block style-route" >
+                                <div id="sol_data3">
+                                    ---
+                                </div>
+                            </span>
+                            <label class="form-toggle-name">
+                                จุดเริ่มต้น:
+                            </label> 
+                            <br>
+                            <span class="d-block style-route" >
+                                <div id="sol_data1">
+                                    ---
+                                </div>
+                            </span>
+                            <label class="form-toggle-name">
+                                เป้าหมาย:
+                            </label>
+                            <br>
+                            <span class="d-block style-route" >
+                                <div id="sol_data2">
+                                    ---
+                                </div>
+                            </span>
+                            <div id="cal-time">
                                 <span class="d-block val-time" >
                                     <div id="value-time">
-                                        0 min
+                                        - min
                                     </div>
                                 </span>
                             </div>
@@ -180,7 +222,7 @@
                             <div class="center-wrap mt-4">
                                 <div class="button">
                                     <div class="button_submit">
-                                        <button type="submit">Submit <i class="fa fa-long-arrow-right"></i></button>
+                                        <button type="submit">ค้นหาเส้นทางอีกครั้ง <i class="fa fa-long-arrow-right"></i></button>
                                         <div class="mask"></div>
                                     </div>
                                 </div>
@@ -198,7 +240,7 @@
                     <a class="nav-link smooths" href="#stations">
                         <div id="scrolldown">
                             <section id="section03" class="demo">
-                                <a href="#stations"><span></span></a>
+                                <a href="#stations" onclick="myStopFunction()"><span></span></a>
                             </section>
                         </div>
                     </a>
@@ -206,35 +248,6 @@
             </ul>
         </div>    
         <!-- End video area -->
-
-
-        
-
-
-
-
-
-        <!-- <iframe
-  src="https://map.longdo.com/map/?tag=bank&title=Bank&lang=en"
-  style="border: none; width: 80%; height: 500px;"
-></iframe> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         <!-- Start bus-stop Area -->
         <section id="stations" class="testimonials ptb-100">
@@ -393,7 +406,7 @@
         <!-- End About-WebApp Area -->
 
         <!-- Start About-Video Area -->
-        <section class="video-area video-bg">
+        <!-- <section class="video-area video-bg">
             <div class="diplay-table">
                 <div class="display-table-cell">
                     <div class="video-inner-content">
@@ -405,11 +418,11 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!-- End About-Video Area -->
 
         <!-- Start Support Area -->
-        <section id="support" class="our-team ptb-100">
+        <section id="support" class="contact-area ptb-100">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 text-center">
@@ -446,7 +459,7 @@
         <!-- End Support Area -->
 
         <!-- Start Contact Area -->
-        <section id="contact" class="contact-area ptb-100">
+        <section id="contact" class="our-team ptb-100">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 text-center">
@@ -545,7 +558,7 @@
 
 
 
-        <a href="#top" class="scrolltop">Top</a>
+        <a href="#top" class="scrolltop" onclick="myStartFunction()">Top</a>
 
         <!-- Start Footer Area -->
         <footer class="footer">
@@ -587,14 +600,14 @@
                                 </div>
                                 <div class="blog-info">
                                     <div class="date-box">
-                                        <span class="month">จุดจอด</span> 01 
+                                        <span class="month">จุดจอด</span> 03
                                     </div>
                                     <div class="title-meta">
-                                        <h3>111</h3>
+                                        <h3>ประตูทางเข้าอาคารหอพักนักศึกษาหญิง</h3>
                                     </div>
                                 </div>
                                 <div class="post-content">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fermentum sagittis nulla, non vehicula mauris rutrum vitae. Sed non consequat dolor. Cras in odio augue.</p>
+                                    <p>สถานที่ใกล้เคียง:</p>
                                 </div>
                             </div>
                         </div>
@@ -631,12 +644,18 @@
         <script src="{{ URL::asset('assets/js/waypoints.min.js') }}"></script>
         <!-- Active JS -->
         <script src="{{ URL::asset('assets/js/active.js') }}"></script>
+        <script type="text/javascript" src="https://api.longdo.com/map/?key=adc629c890170f8bbd6067da48b59a37"></script>
+        
         <script>
+            var val="";
+            var one="";
+            var two="";
+            var three="";
             $('#send_data1').submit(function(event){
-                var one = $("#list-distance1").val();
-                var two = $("#list-distance2").val();
-                var three = $("#list-distance3").val();
-                init("","","");
+                val = 1;
+                one = $("#list-distance1").val();
+                two = $("#list-distance2").val();
+                three = $("#list-distance3").val();
                 $("#fail").css("opacity","1");
                 $("#success").css("opacity","1");
                 $("#fail").css("display","none");
@@ -648,11 +667,11 @@
                 }else if(two == ""){//ช่อง 2 ว่าง
                     // alert('Please input value'); 
                     $("#fail").css("display","block"); 
-                }else if(three == ""){//ช่อง 3 ว่าง
+                }else if(three == ""){//ช่อง 3 ว่าง วิ่งแบบพี่ตูน
                     if(one == "1" || one == "2"){
                         $("#cal-time").css("display","block");
                         $("#success").css("display","block");
-                        init(one,two,three);
+                        val = 2;
                     }else{
                         // alert('Please input value');
                         $("#fail").css("display","block");
@@ -667,7 +686,7 @@
                     }else{
                         $("#cal-time").css("display","block");
                         $("#success").css("display","block");
-                        init(one,two,three);
+                        val = 2;
                     }
                 }else if(three == "2"){//Route2 ทางไม่ผ่าน
                     if(two == "" ){
@@ -676,12 +695,39 @@
                     }else{
                         $("#cal-time").css("display","block");
                         $("#success").css("display","block");
-                        init(one,two,three);
+                        val = 2;
                     }
+                }
+                if(val==2){
+                    init(one,two,three,val);
                 }
                 return false;
             });
+            
+            $('#send_data2').submit(function(event){
+                val = 1;
+                one = "";
+                two = "";
+                three = "";
+                return false;
+            });
 
+            // setInterval(function(){
+            //     init(one,two,three,val);
+            // },5000);
+
+            var myVar;
+            function myStartFunction() {
+                myVar = setInterval(function(){
+                            init(one,two,three,val);
+                        },5000);
+            }
+            
+            function myStopFunction() {
+                clearInterval(myVar);
+            }
+           
+            
         // WITH BUTTONS
             $(".scrolldown").click(function() {
                 $('html, body').animate({
@@ -718,6 +764,12 @@
         </script>
 
         <script>
+            // setInterval(function(){
+            //     init("","","");
+            // },100000);
+        </script>
+
+        <script>
             var route1=[6,8];
             var route2=[];
             var val1;
@@ -726,22 +778,19 @@
             $(document).ready(function () {
                 $("#list-distance1").change(function () {//เลือกช่อง1
                     start_list();
-                    var val = $(this).val();
-                    val1 = val;
+                    val1 = $(this).val();
                     filter_data();
                 });
                 
                 $("#list-distance2").change(function () {//เลือกช่อง2
                     start_list();
-                    var val = $(this).val();
-                    val2 = val;
+                    val2 = $(this).val();
                     filter_data();
                 });
 
                 $("#list-distance3").change(function () {//เลือกช่อง3
                     start_list();
-                    var val = $(this).val();
-                    val3 = val;
+                    val3 = $(this).val();
                     filter_data();
                 });
             });
@@ -782,7 +831,6 @@
                     if (val2 == route1[i]+2 ) {
                         $("#distance3-val1").css("display","none");
                         $("#distance1-val1").css("display","none");
-                        console.log(val2);
                     }
                 }
 
@@ -830,7 +878,6 @@
             }
         </script>
 
-        <script type="text/javascript" src="https://api.longdo.com/map/?key=adc629c890170f8bbd6067da48b59a37"></script>
         <script type="text/javascript">
             var map
             var displacementResult;
@@ -844,25 +891,40 @@
             var speed;
             var route_dest=[];
             var bus_now=[];
+            var result=[];
+            var name_station=[  "รถรับส่งเส้นทางที่1",
+                                "รถรับส่งเส้นทางที่1",
+                                "จุดจอดท่ารถ มจธ. (จุดจอดที่ 1)",
+                                "ประตูทางเข้าโรงเรียนดรุณสิกขาลัย (จุดจอดที่ 2)",
+                                "ประตูทางเข้าอาคารหอพักนักศึกษาหญิง (จุดจอดที่ 3)",
+                                "ด้านหน้าอาคารเรียนรวม 3 (จุดจอดที่ 4)",
+                                "ด้านหน้าอาคารอเนกประสงค์ (จุดจอดที่ 5)",
+                                "ด้านหน้าอาคารสำนักหอสมุด (จุดจอดที่ 6)",
+                                "ด้านหน้าอาคารปฏิบัติการพื้นฐานทางวิทยาศาสตร์ (จุดจอดที่ 7)",
+                                "ประตูทางเข้าสถาบันวิทยาการหุ่นยนต์ภาคสนาม (จุดจอดที่ 8)"	];
+            var name_route=[    "Route1",
+                                "Route2"];
             
-            function init(one, two, three) {
+            function init(one, two, three, val) {
                 map = new longdo.Map({
                     placeholder: document.getElementById('map')
                 });
 
                 var result1 = map.location();//ตำแหน่งตรงกลางของแมพใช้ตอนเพิ่มจุด
                 var result2 = map.location(longdo.LocationMode.Pointer);//ตำแหน่งเม้าของแมพใช้ตอนเพิ่มจุด
-                console.log(result1);
-                console.log(result2);
 
                 map.zoom(17, true);//set zoom start
-                map.location({ lon: 100.493493, lat: 13.651804 }, true);//set lon, lat start
+                // result = map.location();//ตำแหน่งตรงกลางของแมพใช้ตอนเพิ่มจุด
+                result.push ({ lon: 100.493493, lat: 13.651804 });
+                map.location( result[0] , true);//set lon, lat start
+                result=[];
                 map.Layers.setBase(longdo.Layers.LONGDO_OSM);//change map
                 map.zoomRange({ min:15, max: 19});//limit zoom
                 map.Ui.Crosshair.visible(false);
+
                 // map.zoom(true, true);//Zoom in
                 // map.zoom(false, true);//Zoom out
-                // map.location(longdo.LocationMode.Geolocation);//ไปยังตำแหน่งปัจจุบัน
+                
                 // map.Ui.Mouse.enableClick(false);//none click mouse
                 // map.Layers.add(longdo.Layers.TRAFFIC);
                 iconbusstop(100.495324, 13.651941, "bus-stop 1" );//icon bus-stop
@@ -894,12 +956,27 @@
                     }
                 }
                 $('#distance').text(dest);
-                $("#value-time").html(Math.ceil(dest)+" min");
+                $("#value-time").html("รถจะมาถึงภายใน: "+Math.ceil(dest)+" min");
                 dest = 0;
-                Math.ceil(4.4);
-                Route1();//map route1
-                Route2();//map route2
-                
+                // Math.ceil(4.4);
+                if(val == 2){
+                    $("#send_data1").css("display","none");
+                    $("#send_data2").css("display","block");
+                    if(three==""){
+                        three=one;
+                    }
+                    $("#sol_data1").html("   " + name_station[one-1] );
+                    $("#sol_data2").html("   " + name_station[two-1] );
+                    $("#sol_data3").html("   " + name_route[three-1] );
+                    
+                }else{
+                    $("#send_data1").css("display","block");
+                    $("#send_data2").css("display","none");
+                    Route1();//map route1
+                    Route2();//map route2
+                }
+                // Route1();//map route1
+                // Route2();//map route2
             }
 
             function distance(poly, bus_track, point_stop, route) {
@@ -1010,12 +1087,9 @@
 
             function line(route_dest) {//เส้นปะไปยังเป้าหมาย
                 var route_dest = new longdo.Polyline(route_dest, {
-                    // title: 'Dashline',
-                    // detail: '-',
                     lineWidth: 5,
                     lineColor: 'rgba(0, 0, 255, 1.0)',
                     lineStyle: longdo.LineStyle.Dashed
-                    // pointer: true
                 });
                 map.Overlays.add(route_dest); // add geometry object
             }
