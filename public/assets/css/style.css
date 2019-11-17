@@ -2232,6 +2232,12 @@ section > .container{
         background-size: cover;
         background-position: center;
     }
+    .form-toggle-name{
+        font-size: 18px;
+    }
+    label{
+        margin-bottom: 0rem;
+    }
 }
 @media only screen and (min-width: 568px) and (max-width: 1199px){
     .text-box{
@@ -2255,6 +2261,12 @@ section > .container{
         background-size: cover;
         background-position: center;
     }
+    .form-toggle-name{
+        font-size: 18px;
+    }
+    label{
+        margin-bottom: 0rem;
+    }
 }
 @media only screen and (min-width: 1200px){
     .text-box{
@@ -2277,6 +2289,12 @@ section > .container{
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+    }
+    .form-toggle-name{
+        font-size: 15px;
+    }
+    label{
+        margin-bottom: 0rem;
     }
 }
 
@@ -2323,10 +2341,17 @@ section > .container{
 }
 
 .val-time{
-    color: white;
+    color: #1000ff;
     text-align: center;
-    font-size: 50px;
-    padding: 2rem 2rem 0 2rem;
+    font-size: 20px;
+    padding: 0rem 2rem 0 2rem;
+}
+
+.style-route{
+    color: white;
+    font-size: 14px;
+    padding: 0rem 0rem 0 1rem;
+    margin-bottom: .5rem;
 }
 
 .modal-dialog .modal-header button{
@@ -2375,3 +2400,10 @@ section > .container{
     height: 160px;
 }
 
+.class_send_data2 label{
+    font-size: 22px;
+}
+
+.class_send_data2 {
+    display: none;
+}
