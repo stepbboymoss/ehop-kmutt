@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\HelloMail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,12 +13,23 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
+// Route::get('map', function () {
+//     return view('map');
 // });
 
-Route::resource('/place', 'PlaceController' );
+Route::get('test', function () {
+    return view('ebus');
+});
+
+Route::get('mail', function () {
+    $mail = new HelloMail(['customer' => 'John']);
+    Mail::to('stepbboymosstu@gmail.com')->send($mail);
+});
+
+// Route::resource('/place', 'PlaceController' );
+
+Route::resource('/ebus', 'LocationController');
+
+Route::resource('/map', 'PlaceController');
 
 Auth::routes();
-
-Route::resource('home', 'PlaceController');

@@ -173,7 +173,7 @@ button {
 .button .mask {
 	position: absolute;
 	display: block;
-	width: 200px;
+	width: 256px;
 	height: 100px;
 	-webkit-transform: translate3d(-120%,-50px,0) rotate3d(0,0,1,45deg);
 	-ms-transform: translate3d(-120%,-50px,0) rotate3d(0,0,1,45deg);
@@ -2124,7 +2124,7 @@ h3,h2{
   }
   #section03 a span {
     position: absolute;
-    top: 0;
+    top: 80px;
     left: 50%;
     width: 46px;
     height: 46px;
@@ -2218,7 +2218,7 @@ section > .container{
         height: auto;
         left: 50%;
         transform: translateX(-50%);
-        background: #fe5619;
+        background: rgba(255, 100, 0, 1);
         padding: 1rem;
     }
     .form-toggle{
@@ -2247,7 +2247,7 @@ section > .container{
         height: auto;
         left: 50%;
         transform: translateX(-50%);
-        background: #fe5619;
+        background: rgba(255, 100, 0, 1);
         padding: 1rem;
     }
     .form-toggle{
@@ -2276,7 +2276,7 @@ section > .container{
         height: auto;
         right: 10%;
         transform: translate(-15%,-50%);
-        background: #fe5619;
+        background: rgba(255, 100, 0, 1);
         padding: 1rem 1rem 1rem 1rem;
     }
     .form-toggle{
@@ -2306,6 +2306,10 @@ section > .container{
 
 .text-box label{
     color: white;
+}
+
+.label-choose2{
+    padding: 0.75rem 0rem 0rem 0rem;
 }
 
 .text-box h1{
@@ -2341,9 +2345,16 @@ section > .container{
 }
 
 .val-time{
-    color: #1000ff;
+    color: yellow;
     text-align: center;
-    font-size: 20px;
+    font-size: 18px;
+    padding: 0rem 2rem 0 2rem;
+}
+
+.val-sit{
+    color: #43ff40;
+    text-align: center;
+    font-size: 18px;
     padding: 0rem 2rem 0 2rem;
 }
 
@@ -2401,9 +2412,49 @@ section > .container{
 }
 
 .class_send_data2 label{
-    font-size: 22px;
+    font-size: 15px;
 }
 
 .class_send_data2 {
     display: none;
+}
+
+.class_send_data2 hr{
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    border-top: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.form-toggle hr{
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    border-top: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.class_send_data2 .center-wrap {
+    margin-top: 1.0rem!important;
+}
+
+.rotate {
+    /* -moz-transition: all .3s linear;
+    -webkit-transition: all .3s linear; */
+    transition: all .3s linear;
+}
+.rotate .down {
+    transform:rotate(-90deg);
+    transition: all .3s linear;
+}
+
+.fa-chevron-right{
+    transform:rotate(90deg);
+    transition: all .3s linear;
+}
+
+/* .sk-cube-grid .scale-img{
+    left: 10px;
+    right: 10px;
+} */
+
+.custom-select{
+    height: 50px;
 }

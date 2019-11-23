@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Place;
+use App\Location;
+use App\Route;
+use App\route_location;
+use App\Bus;
 
 class PlaceController extends Controller
 {
@@ -12,10 +15,18 @@ class PlaceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index()
     {
-        $places=Place::all()->toArray();
-        return view('home',compact('places'));
+        $locations=Location::all()->toArray();
+        $routes=Route::all()->toArray();
+        $route_locations=route_location::all()->toArray();
+        $buses=Bus::all()->toArray();
+        return view('map',compact('locations','routes','route_locations','buses'));
     }
 
     /**
@@ -36,11 +47,13 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['order'=>'required', 'name'=>'required', 'detail'=>'required']);
+        $this->validate($request,['order'=>'required', 'name'=>'required', 'detail'=>'required', 'lat'=>'required', 'lon'=>'required']);
         $place = new Place([
             'order' => $request ->get('order'),
             'name' => $request ->get('name'),
-            'detail' => $request ->get('detail')
+            'detail' => $request ->get('detail'),
+            'lat' => $request ->get('lat'),
+            'lon' => $request ->get('lon')
         ]);
         $place -> save();
         return redirect()->route('place.create')->with('success','บันทึกสำเร็จ');
