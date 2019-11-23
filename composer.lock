@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a1a867e246c3ccc3c1cc1bd9cf10b9c7",
+    "content-hash": "e280b69c00d6d67cb9566ff96fd1ecc2",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -678,63 +678,6 @@
             "time": "2019-08-07T15:10:45+00:00"
         },
         {
-            "name": "laravel/ui",
-            "version": "v1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/ui.git",
-                "reference": "57e2361b55ed1bc80ff0b3258b9713626fb38a2b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/57e2361b55ed1bc80ff0b3258b9713626fb38a2b",
-                "reference": "57e2361b55ed1bc80ff0b3258b9713626fb38a2b",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/console": "~5.8|^6.0",
-                "illuminate/filesystem": "~5.8|^6.0",
-                "illuminate/support": "~5.8|^6.0",
-                "php": "^7.1.3"
-            },
-            "require-dev": {
-                "mockery/mockery": "^1.0",
-                "phpunit/phpunit": "^8.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                },
-                "laravel": {
-                    "providers": [
-                        "Laravel\\Ui\\UiServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Laravel\\Ui\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                }
-            ],
-            "description": "Laravel UI utilities and presets.",
-            "keywords": [
-                "laravel",
-                "ui"
-            ],
-            "time": "2019-10-11T12:16:52+00:00"
-        },
-        {
             "name": "laravelcollective/html",
             "version": "v6.0.3",
             "source": {
@@ -966,6 +909,56 @@
                 "psr-3"
             ],
             "time": "2019-08-30T09:56:44+00:00"
+        },
+        {
+            "name": "nadaft/contactme",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nadaft/contactme.git",
+                "reference": "a27a43d3b048c978d366b6df2832e60dfd201c70"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nadaft/contactme/zipball/a27a43d3b048c978d366b6df2832e60dfd201c70",
+                "reference": "a27a43d3b048c978d366b6df2832e60dfd201c70",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nadaft\\ContactMe\\ContactMeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nadaft\\ContactMe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nadaft",
+                    "email": "mail@nadaft.com"
+                }
+            ],
+            "description": "Laravel contact us form package to send email and save to database",
+            "keywords": [
+                "contact",
+                "contact form",
+                "contact us",
+                "contactme",
+                "email",
+                "form",
+                "laravel",
+                "nadaft"
+            ],
+            "time": "2019-02-18T17:37:50+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -3405,6 +3398,63 @@
                 "test"
             ],
             "time": "2016-01-20T08:20:44+00:00"
+        },
+        {
+            "name": "laravel/ui",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/ui.git",
+                "reference": "57e2361b55ed1bc80ff0b3258b9713626fb38a2b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/57e2361b55ed1bc80ff0b3258b9713626fb38a2b",
+                "reference": "57e2361b55ed1bc80ff0b3258b9713626fb38a2b",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "~5.8|^6.0",
+                "illuminate/filesystem": "~5.8|^6.0",
+                "illuminate/support": "~5.8|^6.0",
+                "php": "^7.1.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Ui\\UiServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Ui\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Laravel UI utilities and presets.",
+            "keywords": [
+                "laravel",
+                "ui"
+            ],
+            "time": "2019-10-11T12:16:52+00:00"
         },
         {
             "name": "mockery/mockery",

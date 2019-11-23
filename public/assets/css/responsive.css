@@ -201,7 +201,7 @@
         margin: 0 0 15px;
     }
     .scrolltop {
-        bottom: 100px;
+        bottom: 40px;
     }
     .bread-cumbs-area {
         padding: 40px 0 30px;
@@ -238,7 +238,7 @@
     .home-video-area {
         /* height: 600px; */
         /* height: 100vh; */
-        height: calc(100vh - 62.59px);
+        height: calc(100vh - 50.59px);
 
     }
     .video-text-area h1 {
@@ -407,7 +407,7 @@
     }
     .home-video-area {
         /* height: 600px; */
-        height: calc(100vh - 59.6px);
+        height: calc(100vh - 5);
     }
     .home-video-area h1 {
         font-size: 40px;
