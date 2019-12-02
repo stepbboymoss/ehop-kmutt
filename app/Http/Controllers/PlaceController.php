@@ -26,6 +26,7 @@ class PlaceController extends Controller
         $routes=Route::all()->toArray();
         $route_locations=route_location::all()->toArray();
         $buses=Bus::all()->toArray();
+
         return view('map',compact('locations','routes','route_locations','buses'));
     }
 
@@ -106,4 +107,5 @@ class PlaceController extends Controller
         $place->delete();
         return redirect()->route('place.index')->with('success','ลบข้อมูลสำเร็จ');
     }
+
 }

@@ -90,9 +90,9 @@
                             <option value="8" id="distance1-val8">ด้านหน้าอาคารสำนักหอสมุด (จุดจอดที่ 6)</option>
                             <option value="9" id="distance1-val9">ด้านหน้าอาคารปฏิบัติการพื้นฐานทางวิทยาศาสตร์ (จุดจอดที่ 7)</option>
                             <option value="10" id="distance1-val10">ประตูทางเข้าสถาบันวิทยาการหุ่นยนต์ภาคสนาม (จุดจอดที่ 8)</option> -->
-
-                            <option value="1" id="distance1-val1">รถรับส่งเส้นทางที่1</option>
-                            <option value="2" id="distance1-val2">รถรับส่งเส้นทางที่2</option>
+                            
+                            <option value="1" id="distance1-val1">รถรับส่งสีเหลือง(Route1)</option>
+                            <option value="2" id="distance1-val2">รถรับส่งสีแสด(Route2)</option>
                         </select>
                         <label class="label-choose2" for="">
                             <i class="flaticon-map"></i> เป้าหมาย
@@ -358,22 +358,21 @@
             var bus_stop=[];
             var bus_track=[];
             var speed;
+            var speed1;
+            var speed2;
             var route_dest=[];
             var bus_now=[];
             var result=[];
             var route1=[6,8];
             var route2=[];
             var round;
-            var name_station=[  "รถรับส่งสีเหลือง",
-                                "รถรับส่งสีแสด"];
-            var name_route=[    "Route1",
-                                "Route2"];
+            var name_station=[  "รถรับส่งสีเหลือง(Route1)",
+                                "รถรับส่งสีแสด(Route2)"];
             var val_map="";
             var one_map="";
             var two_map="";
             var route_map="";
             var m=2;
-
             @foreach($locations as $location)
                 name_station[m] = "{{$location['location_name']}}";
                 m=m+1;
@@ -463,7 +462,6 @@
             setInterval(function(){
                 init(one_map, two_map, route_map, val_map, 1);
             },10000);
-
             function init(one, two, route, val, cal) {
                 map = new longdo.Map({
                     placeholder: document.getElementById('map')
@@ -481,39 +479,26 @@
                 map.zoomRange({ min:15, max: 19});//limit zoom
                 map.Ui.Crosshair.visible(false);
 
-                // map.zoom(true, true);//Zoom in
-                // map.zoom(false, true);//Zoom out
-                
-                // map.Ui.Mouse.enableClick(false);//none click mouse
-                // map.Layers.add(longdo.Layers.TRAFFIC);
                 @foreach($locations as $location)
                     iconbusstop("{{$location['lat']}}", "{{$location['lon']}}", "bus-stop "+"{{$location['order']}}" );
                 @endforeach
-                // iconbusstop(100.495324, 13.651941, "bus-stop 1" );//icon bus-stop
-                // iconbusstop(100.495041, 13.650136, "bus-stop 2" );//icon bus-stop
-                // iconbusstop(100.494177, 13.649396, "bus-stop 3" );//icon bus-stop
-                // iconbusstop(100.491991, 13.650224, "bus-stop 4" );//icon bus-stop
-                // iconbusstop(100.493092, 13.652134, "bus-stop 5" );//icon bus-stop
-                // iconbusstop(100.493964, 13.652368, "bus-stop 6" );//icon bus-stop
-                // iconbusstop(100.494790, 13.653657, "bus-stop 7" );//icon bus-stop
-                // iconbusstop(100.494535, 13.654025, "bus-stop 8" );//icon bus-stop
-                
+
                 var position_start = one;
                 var station = two-3;
                 var cal_round;
                 var m=0;
-
-                @foreach($buses as $bus)
-                    if("{{$bus['route_id']==1}}" && route != 2){
-                        iconbus("{{$bus['lat']}}", "{{$bus['lon']}}", "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset("assets/img/icon_bus1.png") }}' alt='map'></div>'" );//icon bus  
-                    }
-                    if("{{$bus['route_id']==2}}" && route != 1){
-                        iconbus("{{$bus['lat']}}", "{{$bus['lon']}}", "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset("assets/img/icon_bus2.png") }}' alt='map'></div>'" );//icon bus  
-                    }
-                @endforeach
-                // iconbus(100.495054703481, 13.6528385748562, "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset('assets/img/icon_bus1.png') }}' alt='map'></div>'" );//icon bus  
-                // iconbus(100.495454703481, 13.6510385748562, "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset('assets/img/icon_bus2.png') }}' alt='map'></div>'" );//icon bus  
                 
+                $.get( "firebase/getlocation", function( result ) {
+                    if(route != 2){
+                        iconbus(result['data']['bus1']['lat'], result['data']['bus1']['long'], "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset("assets/img/icon_bus1.png") }}' alt='map'></div>'" );//icon bus  
+                        speed1 = result['data']['bus1']['speed'];
+                    }
+                    if(route != 1){
+                        iconbus(result['data']['bus2']['lat'], result['data']['bus2']['long'], "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset("assets/img/icon_bus2.png") }}' alt='map'></div>'" );//icon bus  
+                        speed2 = result['data']['bus2']['speed'];
+                    }
+                });
+
                 // iconnow(100.493493, 13.651804 );//icon now
                 value_route_bus();
                 // Math.ceil(4.4);
@@ -555,7 +540,10 @@
                         }
                     }
                     $("#value-time").html("รถจะมาถึงภายใน: "+Math.ceil(dest)+" นาที");
-                    $("#value-sit").html("จำนวนที่ว่างบนรถ: 10 ที่นั่ง");
+                    $.get( "countimage", function( result ) {
+                        console.log(result['data']);
+                        $("#value-sit").html("จำนวนที่ว่างบนรถ: "+result['data']+" ที่นั่ง");
+                    });
                     dest = 0;
 
                     $("#send_data1").css("display","none");
@@ -563,7 +551,7 @@
 
                     $("#sol_data1").html("   " + name_station[one-1] );
                     $("#sol_data2").html("   " + name_station[two-1] );
-                    $("#sol_data3").html("   " + name_route[route-1] );
+                    $("#sol_data3").html("   " + name_station[route-1] );
                     
                 }else{
                     $("#send_data1").css("display","block");
@@ -614,6 +602,7 @@
                             i=0;
                         }   
                     }
+
                     MarkerCar2 = new longdo.Marker(poly[i+1], {draggable: false});
                     // map.Overlays.add(MarkerCar1);
                     // map.Overlays.add(MarkerCar2);
@@ -621,6 +610,11 @@
                     dest = dest + displacementResult;
                     route_dest.push(poly[i]);
                     
+                }
+                if(route == 1){
+                    speed=speed1;
+                }else if(route == 2){
+                    speed=speed2;
                 }
                 route_dest.push(poly[i]);
                 dest = (60*(dest+dest_old))/(speed*1000);
@@ -694,7 +688,6 @@
             }
 
             function value_route_bus(){//วาดเส้นทางวนรถของเส้นทางที่1และ2
-                speed=20;
                 //route 1
                 poly1.push({ lon: 100.495339035987, lat: 13.6520494455359 });
                 poly1.push( bus_stop[0]);

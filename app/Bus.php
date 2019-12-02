@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bus extends Model
 {
-    protected $fillable = ['route_id', 'lat', 'lon'];
+    protected $fillable = ['num'];
 }

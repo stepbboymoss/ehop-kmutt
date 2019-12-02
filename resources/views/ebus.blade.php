@@ -316,14 +316,14 @@
         <!-- End About-Video Area -->
 
         <!-- Start Support Area -->
-        <!-- <section id="support" class="contact-area ptb-100our-team ptb-100">
+        <section id="support" class="contact-area ptb-100our-team ptb-100">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 offset-lg-2 text-center">
                         <div class="section-title">
                             <h2>How to use</h2>
-                            <p>Let's get to know a bit about what the Web App for KMUTT e-Bus shuttle service can do.</p>
-                            <p>มาทำความรู้จักกันสักนิดว่าWeb App for KMUTT e-Bus shuttle Serviceทำอะไรได้บ้าง</p>
+                            <!-- <p>Let's get to know a bit about what the Web App for KMUTT e-Bus shuttle service can do.</p> -->
+                            <p>มาทำความรู้จักกันสักนิดว่าWeb App for KMUTT e-Bus ทำอะไรได้บ้าง</p>
                             <span class="section-title-bg">Support</span>
                         </div>
                     </div>
@@ -356,7 +356,7 @@
                     </div>
                 </div>
               </div>
-        </section> -->
+        </section>
         <!-- End Support Area -->
 
         <!-- Start Contact Area -->
@@ -588,7 +588,7 @@
             $(".scrolldown").click(function() {
                 $('html, body').animate({
                     scrollTop: $("#go2").offset().top
-                }, 1000);
+                }, 1000);   
             });
         // WITH LINKS 
             $(window).on("load", function() {

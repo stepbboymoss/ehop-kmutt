@@ -26,10 +26,15 @@ Route::get('mail', function () {
     Mail::to('stepbboymosstu@gmail.com')->send($mail);
 });
 
-// Route::resource('/place', 'PlaceController' );
+Route::get('/test', 'PlaceController@create' );
 
 Route::resource('/ebus', 'LocationController');
 
 Route::resource('/map', 'PlaceController');
+
+Route::get('firebase/{bus}/{lat}/{long}/{speed}','FirebaseController@index');
+Route::get('firebase/getlocation','FirebaseController@get_location');
+Route::get('countimage','LocationController@countimg');
+Route::get('savecount','LocationController@savecount');
 
 Auth::routes();
