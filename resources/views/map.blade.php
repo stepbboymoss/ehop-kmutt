@@ -373,6 +373,8 @@
             var two_map="";
             var route_map="";
             var m=2;
+            var save_people=0;
+
             @foreach($locations as $location)
                 name_station[m] = "{{$location['location_name']}}";
                 m=m+1;
@@ -460,8 +462,43 @@
             });
 
             setInterval(function(){
+                var round_bus;
+
+                round_bus = distance(poly1, bus_track[0], bus_stop[i], 1, 2);
+                for (var i = 0; i < 8; ++i) {
+                    if(route1[i] == i+1 ){
+                        continue;
+                    }
+                    round_bus = distance(poly1, bus_track[0], bus_stop[i], 1, 2);
+                    if(round_bus <= 0.002 && speed <= 5 && save_people == 0){
+                        $.get( "savecount", function( result ) {
+                        });
+                        save_people=1;
+                    }
+                    if(round_bus >= 0.002 && speed >= 5 && save_people == 1){
+                        save_people=0;
+                    }
+                }
+                for (var i = 0; i < 8; ++i) {
+                    if(route2[i] == i+1 ){
+                        continue;
+                    }
+                    round_bus = distance(poly2, bus_track[1], bus_stop[i], 2, 2);
+                    if(round_bus <= 0.002 && speed <= 5 && save_people == 0){
+                        $.get( "savecount", function( result ) {
+                        });
+                        save_people=1;
+                    }
+                    if(round_bus >= 0.002 && speed >= 5 && save_people == 1){
+                        save_people=0;
+                    }
+                }
+            },5000);
+            
+            setInterval(function(){
                 init(one_map, two_map, route_map, val_map, 1);
             },10000);
+            
             function init(one, two, route, val, cal) {
                 map = new longdo.Map({
                     placeholder: document.getElementById('map')
@@ -541,9 +578,9 @@
                     }
                     $("#value-time").html("รถจะมาถึงภายใน: "+Math.ceil(dest)+" นาที");
                     $.get( "countimage", function( result ) {
-                        console.log(result['data']);
                         $("#value-sit").html("จำนวนที่ว่างบนรถ: "+result['data']+" ที่นั่ง");
                     });
+
                     dest = 0;
 
                     $("#send_data1").css("display","none");
@@ -617,7 +654,7 @@
                     speed=speed2;
                 }
                 route_dest.push(poly[i]);
-                dest = (60*(dest+dest_old))/(speed*1000);
+                dest = (60*(dest+dest_old))/(speed);
 
                 if(cal==1){
                     map.Overlays.add(MarkerCar2);

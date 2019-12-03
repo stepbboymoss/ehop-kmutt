@@ -96,7 +96,6 @@ class LocationController extends Controller
         $imageName = "faceapi" . '.jpg';
 
         Storage::disk('public')->put($imageName, base64_decode($test));
-        // dd($test);
 
         $output = imagecreatefromjpeg(public_path('storage/faceapi.jpg'));
         $image = $vision->image(file_get_contents(public_path('storage/faceapi.jpg'))

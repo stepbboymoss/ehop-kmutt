@@ -40,7 +40,7 @@ class DashboardController extends Controller
     public function highchartsearch(Request $request)
     {
         
-        $this->validate($request, [
+        $this->validate($request, [ 
             'month'  => 'required',
             'year'  => 'required'  ]);
 
@@ -51,12 +51,12 @@ class DashboardController extends Controller
             ->where('created_at', 'LIKE','%-'.$month.'-%')
             ->Where('created_at', 'LIKE','%'.$year.'%')
             ->get();
-
+        
         $dates = Dashboard::select('created_at')
             ->where('created_at', 'LIKE','%-'.$month.'-%')
             ->Where('created_at', 'LIKE','%'.$year.'%')
             ->get();
-
+            
         $barchart = $this->barhighchart($peoples,$dates);
 
         if("$peoples" != "[]" || "$dates" != "[]"){
