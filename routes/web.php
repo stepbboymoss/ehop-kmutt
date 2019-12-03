@@ -13,20 +13,18 @@ use App\Mail\HelloMail;
 |
 */
 
-// Route::get('map', function () {
-//     return view('map');
+// Route::get('/send/email', 'HomeController@mail');
+
+// Route::get('test', function () {
+//     return view('ebus');
 // });
 
-Route::get('test', function () {
-    return view('ebus');
-});
+// Route::get('mail', function () {
+//     $mail = new HelloMail(['customer' => 'John']);
+//     Mail::to('stepbboymosstu@gmail.com')->send($mail);
+// });
 
-Route::get('mail', function () {
-    $mail = new HelloMail(['customer' => 'John']);
-    Mail::to('stepbboymosstu@gmail.com')->send($mail);
-});
-
-Route::get('/test', 'PlaceController@create' );
+// Route::get('/test', 'PlaceController@create' );
 
 Route::resource('/ebus', 'LocationController');
 
@@ -36,5 +34,9 @@ Route::get('firebase/{bus}/{lat}/{long}/{speed}','FirebaseController@index');
 Route::get('firebase/getlocation','FirebaseController@get_location');
 Route::get('countimage','LocationController@countimg');
 Route::get('savecount','LocationController@savecount');
+
+Route::get('dashboard_ebus', 'DashboardController@index');
+Route::get('search', 'DashboardController@highchartsearch') ;
+Route::get('test', 'DashboardController@index');
 
 Auth::routes();

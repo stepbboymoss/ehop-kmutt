@@ -52,7 +52,7 @@
             }
         </style>
     </head>
-  
+
     <body data-spy="scroll" data-offset="70" data-terget="#home" style="font-family: 'Kanit', sans-serif;" >
 
         <!-- Preloader start -->
@@ -100,7 +100,7 @@
 							<a class="nav-link smooths" href="#contact">Contact</a>
                         </li>
                         <li class="nav-item">
-							<a class="nav-link smooths" href="https://docs.google.com/forms/d/e/1FAIpQLScjeiSwpTOus_BckMqa_ewQ-JjAJb_O-novbopVNx10eoT1vg/viewform?fbclid=IwAR2fMwAScsRNFuZFBZbePOBP-yUgjKnob0VY00X9Rrki1faEiFg46X3zrBc" target="_blank">Questionnaire</a>
+							<a class="nav-link smooths" href="https://docs.google.com/forms/d/e/1FAIpQLSd7W-2JxoJH5FANUmd7SWss2wmcUNq_vpd7oLbLK5UUxOjr0w/viewform" target="_blank">Questionnaire</a>
 						</li>
 					</ul>
 				</div><!--/.nav-collapse -->
