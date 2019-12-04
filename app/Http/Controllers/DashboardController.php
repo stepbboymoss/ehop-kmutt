@@ -18,17 +18,24 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $day_s = ["00","01","02","03","04","05","06","07","08","09","10",
+                "11","12","13","14","15","16","17","18","19","20",
+                "21","22","23","24","25","26","27","28","29","30","31"];
+        $month_s = ["00","31","28","31","30","31",
+                    "30","31","31","30","31","30","31"];  
         $to_id = DB::table('dashboards')->max('id');
         $from_id = $to_id - 30;
-
-        $peoples = Dashboard::select('people')
-            ->whereBetween('id', [$from_id, $to_id])
-            ->get();
-
-        $dates = Dashboard::select('created_at')
-            ->whereBetween('id', [$from_id, $to_id])
-            ->get();
         
+        $year=date("Y", time());
+        $month=date("m", time());
+        for($i = 1; $i <= $month_s[(int)$month]; $i++){
+            $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
+            $peoples[$i] = Dashboard::select('people')
+                ->where('created_at', 'LIKE','%-'.$month.'-%')
+                ->Where('created_at', 'LIKE','%'.$year.'%')
+                ->Where('created_at', 'LIKE','%-'."$day_s[$i]".' %')
+                ->sum('people');
+        }
         $barchart = $this->barhighchart($peoples,$dates);
         $month="0";
         $year="0";
@@ -39,7 +46,12 @@ class DashboardController extends Controller
 
     public function highchartsearch(Request $request)
     {
-        
+        $day_s = ["00","01","02","03","04","05","06","07","08","09","10",
+                "11","12","13","14","15","16","17","18","19","20",
+                "21","22","23","24","25","26","27","28","29","30","31"];
+        $month_s = ["00","31","28","31","30","31",
+            "30","31","31","30","31","30","31"]; 
+
         $this->validate($request, [ 
             'month'  => 'required',
             'year'  => 'required'  ]);
@@ -47,19 +59,30 @@ class DashboardController extends Controller
         $month = $request->get('month');
         $year = $request->get('year');
 
-        $peoples = Dashboard::select('people')
-            ->where('created_at', 'LIKE','%-'.$month.'-%')
-            ->Where('created_at', 'LIKE','%'.$year.'%')
-            ->get();
-        
-        $dates = Dashboard::select('created_at')
-            ->where('created_at', 'LIKE','%-'.$month.'-%')
-            ->Where('created_at', 'LIKE','%'.$year.'%')
-            ->get();
+        for($i = 1; $i <= $month_s[(int)$month]; $i++){
+            $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
+            $peoples[$i] = Dashboard::select('people')
+                ->where('created_at', 'LIKE','%-'.$month.'-%')
+                ->Where('created_at', 'LIKE','%'.$year.'%')
+                ->Where('created_at', 'LIKE','%-'."$day_s[$i]".' %')
+                ->sum('people');
+        }
+
+        // dd($dates);
+
+        // $peoples = Dashboard::select('people')
+        //     ->where('created_at', 'LIKE','%-'.$month.'-%')
+        //     ->Where('created_at', 'LIKE','%'.$year.'%')
+        //     ->get();
+
+        // $dates = Dashboard::select('created_at')
+        //     ->where('created_at', 'LIKE','%-'.$month.'-%')
+        //     ->Where('created_at', 'LIKE','%'.$year.'%')
+        //     ->get();
             
         $barchart = $this->barhighchart($peoples,$dates);
 
-        if("$peoples" != "[]" || "$dates" != "[]"){
+        if($peoples != "[]" || $dates != "[]"){
             return view('dashboard',compact('month','year'))
             ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
         }else{
@@ -82,11 +105,11 @@ class DashboardController extends Controller
         $dataArray = [];
 
         foreach ($dates as $date){
-            array_push($date_at,date('d-M-Y', strtotime($date->created_at)));
+            array_push($date_at,date('d-M-Y', strtotime($date)));
         }
 
         foreach ($peoples as $people){
-            array_push($people_bus, (int)$people->people);
+            array_push($people_bus, (int)$people);
         }
 
         array_push($dataArray, $date_at, $people_bus);
@@ -104,8 +127,8 @@ class DashboardController extends Controller
                 "title" => array(
                     "text" => "จำนวนคน"
                 ),
-                "min" => "20",
-                "max" => "100",
+                "min" => "0",
+                "max" => "200",
             )
         );
 
