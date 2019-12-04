@@ -70,7 +70,7 @@
             <!-- MENU SIDEBAR-->
             <aside class="menu-sidebar d-none d-lg-block">
                 <div class="logo">
-                    <a href="#">
+                    <a href="dashboard_ebus">
                     <br><br><img src="{{ URL::asset('dashboard/images/icon/EHOP.png')}}" alt="Cool Admin" />
                     </a>
                 </div>
@@ -97,7 +97,7 @@
                         <div class="container-fluid">
                             <div class="header-wrap">
                                 <nav id="breadcrumbs">
-                                    @if(count($errors) > 0)
+                                    <!-- @if(count($errors) > 0)
                                         <div class="alert alert-danger">
                                             กรุณาใส่ข้อมูลให้ครบทุกช่อง <br>
                                         </div>
@@ -107,21 +107,21 @@
                                             <button type="button" class="close" data-dismiss="alert">×</button>
                                             <strong>{{ $message }}</strong>
                                         </div>
-                                    @endif
+                                    @endif -->
 
                                     <form class="form-header" action="/search" method="get">
                                         <div class="col-md-12">
                                             <select class="form-control" name="month" id="list-month">
                                                 <option value="">กรุณาเลือกเดือน</option>
-                                                <option value="01">มกราคม</option>
-                                                <option value="02">กุมภาพันธ์ </option>
-                                                <option value="03">มีนาคม </option>
-                                                <option value="04">เมษายน</option>
-                                                <option value="05">พฤษภาคม</option>
-                                                <option value="06">มิถุนายน</option>
-                                                <option value="07">กรกฎาคม </option>
-                                                <option value="08">สิงหาคม</option>
-                                                <option value="09">กันยายน</option>
+                                                <option value="1">มกราคม</option>
+                                                <option value="2">กุมภาพันธ์ </option>
+                                                <option value="3">มีนาคม </option>
+                                                <option value="4">เมษายน</option>
+                                                <option value="5">พฤษภาคม</option>
+                                                <option value="6">มิถุนายน</option>
+                                                <option value="7">กรกฎาคม </option>
+                                                <option value="8">สิงหาคม</option>
+                                                <option value="9">กันยายน</option>
                                                 <option value="10">ตุลาคม</option>
                                                 <option value="11">พฤศจิกายน</option>
                                                 <option value="12">ธันวาคม</option>
@@ -192,11 +192,27 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="au-card recent-report">
                                         <div class="au-card-inner">
                                             <h3 class="title-2">จำนวนคนที่ใช้บริการ</h3> <br>
-                                            <div id="container"></div>
+                                            <div id="container1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="au-card recent-report">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2">จำนวนคนที่ใช้บริการRoute1</h3> <br>
+                                            <div id="container2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="au-card recent-report">
+                                        <div class="au-card-inner">
+                                            <h3 class="title-2">จำนวนคนที่ใช้บริการRoute2</h3> <br>
+                                            <div id="container3"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -257,19 +273,23 @@
         <!-- Main JS-->
         <script src="{{ URL::asset('dashboard/js/main.js')}}"></script>
         <script type="text/javascript">
-            $(function() {
-                $('#container').highcharts( <?php echo json_encode($chartarray) ?>)
-            });
-
             var month = {{$month}};
             var year = {{$year}};
-            if(month != "0" || year != "0" ){
-                if(month < 10){
-                    month = "0" + month;
-                }
-                $("#list-month").val(month);
-                $("#list-year").val(year);
-            }
+            $("#list-month").val(month);
+            $("#list-year").val(year);
+            $.get( "chartbus?month={{$month}}&year={{$year}}", function( result ) {
+                $('#container1').highcharts( result['data'])
+            });
+
+            $.get( "chartbus1?month={{$month}}&year={{$year}}", function( result ) {
+                $('#container2').highcharts( result['data'])
+                console.log(result['data']);
+            });
+
+            $.get( "chartbus2?month={{$month}}&year={{$year}}", function( result ) {
+                $('#container3').highcharts( result['data'])
+                console.log(result['data']);
+            });
 
         </script>
     </body>

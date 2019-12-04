@@ -8,50 +8,41 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    // public function __construct(){
-    //     $this->people_bus;
-    // }
+    public $day_s = ["00","01","02","03","04","05","06","07","08","09","10",
+                "11","12","13","14","15","16","17","18","19","20",
+                "21","22","23","24","25","26","27","28","29","30","31"];
+    public $month_s = ["00","31","28","31","30","31",
+        "30","31","31","30","31","30","31"];  
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $day_s = ["00","01","02","03","04","05","06","07","08","09","10",
-                "11","12","13","14","15","16","17","18","19","20",
-                "21","22","23","24","25","26","27","28","29","30","31"];
-        $month_s = ["00","31","28","31","30","31",
-                    "30","31","31","30","31","30","31"];  
-        $to_id = DB::table('dashboards')->max('id');
-        $from_id = $to_id - 30;
-        
         $year=date("Y", time());
         $month=date("m", time());
-        for($i = 1; $i <= $month_s[(int)$month]; $i++){
-            $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
-            $peoples[$i] = Dashboard::select('people')
-                ->where('created_at', 'LIKE','%-'.$month.'-%')
-                ->Where('created_at', 'LIKE','%'.$year.'%')
-                ->Where('created_at', 'LIKE','%-'."$day_s[$i]".' %')
-                ->sum('people');
-        }
-        $barchart = $this->barhighchart($peoples,$dates);
-        $month="0";
-        $year="0";
-        
-        return view('dashboard',compact('month','year'))
-            ->withChartarray ($barchart) ;
+        return view('dashboard',compact('month','year'));
     }
 
-    public function highchartsearch(Request $request)
+    public function search(Request $request)
     {
-        $day_s = ["00","01","02","03","04","05","06","07","08","09","10",
-                "11","12","13","14","15","16","17","18","19","20",
-                "21","22","23","24","25","26","27","28","29","30","31"];
-        $month_s = ["00","31","28","31","30","31",
-            "30","31","31","30","31","30","31"]; 
+        $year=date("Y", time());
+        $month=date("m", time());
+        $this->validate($request, [ 
+            'month'  => 'required',
+            'year'  => 'required'  ]);
 
+        $month = $request->get('month');
+        $year = $request->get('year');
+        return view('dashboard',compact('month','year'));
+    }
+
+    public function barchartbus(Request $request){
+        $year=date("Y", time());
+        $month=date("m", time());
         $this->validate($request, [ 
             'month'  => 'required',
             'year'  => 'required'  ]);
@@ -59,39 +50,92 @@ class DashboardController extends Controller
         $month = $request->get('month');
         $year = $request->get('year');
 
-        for($i = 1; $i <= $month_s[(int)$month]; $i++){
+        for($i = 1; $i <= $this->month_s[(int)$month]; $i++){
             $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
             $peoples[$i] = Dashboard::select('people')
                 ->where('created_at', 'LIKE','%-'.$month.'-%')
                 ->Where('created_at', 'LIKE','%'.$year.'%')
-                ->Where('created_at', 'LIKE','%-'."$day_s[$i]".' %')
+                ->Where('created_at', 'LIKE','%-'.$this->day_s[$i].' %')
                 ->sum('people');
         }
 
-        // dd($dates);
-
-        // $peoples = Dashboard::select('people')
-        //     ->where('created_at', 'LIKE','%-'.$month.'-%')
-        //     ->Where('created_at', 'LIKE','%'.$year.'%')
-        //     ->get();
-
-        // $dates = Dashboard::select('created_at')
-        //     ->where('created_at', 'LIKE','%-'.$month.'-%')
-        //     ->Where('created_at', 'LIKE','%'.$year.'%')
-        //     ->get();
-            
-        $barchart = $this->barhighchart($peoples,$dates);
+        $barchart = $this->barhighchart($peoples,$dates,"bar");
 
         if($peoples != "[]" || $dates != "[]"){
+            return $this->responseRequestSuccess($barchart);
+            // return view('dashboard',compact('month','year'))
+            // ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
+        }else{
             return view('dashboard',compact('month','year'))
-            ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
+            ->withChartarray ($barchart)->with('success', 'ไม่สำเสร็จ');
+        }
+    }
+
+    public function barchartbus1(Request $request){
+        $year=date("Y", time());
+        $month=date("m", time());
+        $this->validate($request, [ 
+            'month'  => 'required',
+            'year'  => 'required'  ]);
+
+        $month = $request->get('month');
+        $year = $request->get('year');
+
+        for($i = 1; $i <= $this->month_s[(int)$month]; $i++){
+            $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
+            $peoples[$i] = Dashboard::select('people')
+                ->where('created_at', 'LIKE','%-'.$month.'-%')
+                ->Where('created_at', 'LIKE','%'.$year.'%')
+                ->Where('created_at', 'LIKE','%-'.$this->day_s[$i].' %')
+                ->Where('route_id', 'LIKE','1')
+                ->sum('people');
+        }
+
+        $barchart = $this->barhighchart($peoples,$dates,"bar");
+
+        if($peoples != "[]" || $dates != "[]"){
+            return $this->responseRequestSuccess($barchart);
+            // return view('dashboard',compact('month','year'))
+            // ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
+        }else{
+            return view('dashboard',compact('month','year'))
+            ->withChartarray ($barchart)->with('success', 'ไม่สำเสร็จ');
+        }
+    }
+
+    public function barchartbus2(Request $request){
+        $year=date("Y", time());
+        $month=date("m", time());
+        $this->validate($request, [ 
+            'month'  => 'required',
+            'year'  => 'required'  ]);
+
+        $month = $request->get('month');
+        $year = $request->get('year');
+
+        for($i = 1; $i <= $this->month_s[(int)$month]; $i++){
+            $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
+            $peoples[$i] = Dashboard::select('people')
+                ->where('created_at', 'LIKE','%-'.$month.'-%')
+                ->Where('created_at', 'LIKE','%'.$year.'%')
+                ->Where('created_at', 'LIKE','%-'.$this->day_s[$i].' %')
+                ->Where('route_id', 'LIKE','2')
+                ->sum('people');
+        }
+
+        $barchart = $this->barhighchart($peoples,$dates,"bar");
+
+        if($peoples != "[]" || $dates != "[]"){
+            return $this->responseRequestSuccess($barchart);
+            // return view('dashboard',compact('month','year'))
+            // ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
         }else{
             return view('dashboard',compact('month','year'))
             ->withChartarray ($barchart)->with('success', 'ไม่สำเสร็จ');
         }
     }
     
-    public function barhighchart($peoples,$dates){
+    public function barhighchart($peoples,$dates,$deside){
         //Highcharts
         $chartArray ["chart"] = array(
             "zoomType" => "xy"
@@ -148,7 +192,7 @@ class DashboardController extends Controller
         $chartArray ["series"] = array(
             array(
                 "name" => "จำนวนคนที่ใช้บริการ",
-                "type" => "bar",
+                "type" => $deside,
                 "data" => $people_bus,
                 "color" => "#FF6600",
                 "tooltip" => array(
@@ -223,5 +267,28 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function countimg()
+    {
+        $faces=100;
+        return $this->responseRequestSuccess($faces);
+    }
+
+    protected function responseRequestSuccess($ret)
+    {
+        return response()->json(['status' => 'success', 'data' => $ret], 200)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    }
+    /*
+    |--------------------------------------------------------------------------
+    | response เมื่อข้อมูลมีการผิดพลาด
+    |--------------------------------------------------------------------------
+     */
+    protected function responseRequestError($status = '', $ret = '', $message = 'Bad request', $statusCode = 200)
+    {
+        return response()->json(['status' => $status, 'data' => $ret, 'error' => $message], $statusCode)
+            ->header('Access-Control-Allow-Origin', '*')
+            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     }
 }

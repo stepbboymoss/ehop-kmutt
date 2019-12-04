@@ -36,7 +36,14 @@ Route::get('countimage','LocationController@countimg');
 Route::get('savecount','LocationController@savecount');
 
 Route::get('dashboard_ebus', 'DashboardController@index');
-Route::get('search', 'DashboardController@highchartsearch') ;
+Route::get('search', 'DashboardController@search');
+
+// Route::get('search', 'DashboardController@barchartbus1');
+Route::get('chartbus', 'DashboardController@barchartbus');
+Route::get('chartbus1', 'DashboardController@barchartbus1');
+Route::get('chartbus2', 'DashboardController@barchartbus2');
+
+
 Route::get('test', 'DashboardController@index');
 
 Auth::routes();
