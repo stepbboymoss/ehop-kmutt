@@ -357,9 +357,7 @@
             var dest=0;
             var bus_stop=[];
             var bus_track=[];
-            var speed;
-            var speed1;
-            var speed2;
+            var speed[];
             var route_dest=[];
             var bus_now=[];
             var result=[];
@@ -373,7 +371,11 @@
             var two_map="";
             var route_map="";
             var m=2;
-            var save_people=0;
+            var save_people=[0,0];
+            var round_bus;
+            var people_old=[];
+            var people_new=[];
+            var people=[];
 
             @foreach($locations as $location)
                 name_station[m] = "{{$location['location_name']}}";
@@ -462,38 +464,26 @@
             });
 
             setInterval(function(){
-                var round_bus;
+                
+                if(speed[1] <= 5 && save_people[0] == 0){
+                    $.get( "firebase/getpeople", function( result ) {7
+                        people_old[0] = result['data']['bus1']['old'];
+                    });
+                    $.get( "countimage", function( result ) {
+                        people_new[0] = result['data'];
+                    });
+                    people[0] = people_new[0] - people_old[0];
+                    console.log("people="+people[0]);
+                    console.log("people_new="+people_new[0]);
+                    console.log("people_old="+people_old[0]);
 
-                round_bus = distance(poly1, bus_track[0], bus_stop[i], 1, 2);
-                for (var i = 0; i < 8; ++i) {
-                    if(route1[i] == i+1 ){
-                        continue;
-                    }
-                    round_bus = distance(poly1, bus_track[0], bus_stop[i], 1, 2);
-                    if(round_bus <= 0.002 && speed <= 5 && save_people == 0){
-                        $.get( "savecount", function( result ) {
-                        });
-                        save_people=1;
-                    }
-                    if(round_bus >= 0.002 && speed >= 5 && save_people == 1){
-                        save_people=0;
-                    }
+                    save_people[0]=1;
                 }
-                for (var i = 0; i < 8; ++i) {
-                    if(route2[i] == i+1 ){
-                        continue;
-                    }
-                    round_bus = distance(poly2, bus_track[1], bus_stop[i], 2, 2);
-                    if(round_bus <= 0.002 && speed <= 5 && save_people == 0){
-                        $.get( "savecount", function( result ) {
-                        });
-                        save_people=1;
-                    }
-                    if(round_bus >= 0.002 && speed >= 5 && save_people == 1){
-                        save_people=0;
-                    }
+                if(speed[1] >= 5 && save_people[0] == 1){
+                    save_people[0]=0;
                 }
-            },5000);
+                
+            },1000);
             
             setInterval(function(){
                 init(one_map, two_map, route_map, val_map, 1);
@@ -528,11 +518,11 @@
                 $.get( "firebase/getlocation", function( result ) {
                     if(route != 2){
                         iconbus(result['data']['bus1']['lat'], result['data']['bus1']['long'], "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset("assets/img/icon_bus1.png") }}' alt='map'></div>'" );//icon bus  
-                        speed1 = result['data']['bus1']['speed'];
+                        speed[1] = result['data']['bus1']['speed'];
                     }
                     if(route != 1){
                         iconbus(result['data']['bus2']['lat'], result['data']['bus2']['long'], "E-Hop", "'<div class='bus-map'><img src='{{ URL::asset("assets/img/icon_bus2.png") }}' alt='map'></div>'" );//icon bus  
-                        speed2 = result['data']['bus2']['speed'];
+                        speed[2] = result['data']['bus2']['speed'];
                     }
                 });
 
@@ -602,7 +592,7 @@
                 var p;
                 var dest_old=100000;
                 
-                for (var i = 0; i < poly.length; ++i) {//คำนวนจุดรถถึงจุดในเส้น
+                for (var i = 0; i < poly.length; ++i) {//คำนวณจุดรถถึงจุดในเส้น
                     MarkerCar1 = new longdo.Marker(poly[i], {draggable: false});
                     MarkerCar2 = new longdo.Marker(point_start, {draggable: false});
                     cal_distance();
@@ -614,7 +604,7 @@
                 }
                 route_dest.push(point_start);
 
-                for (var i = p+1; i <= poly.length; ++i) {//คำนวนจุดในเส้นถึงเป้าหมาย
+                for (var i = p+1; i <= poly.length; ++i) {//คำนวณจุดในเส้นถึงเป้าหมาย
                     if (poly[i]==point_stop){
                         break;
                     }
@@ -639,7 +629,7 @@
                             i=0;
                         }   
                     }
-
+ 
                     MarkerCar2 = new longdo.Marker(poly[i+1], {draggable: false});
                     // map.Overlays.add(MarkerCar1);
                     // map.Overlays.add(MarkerCar2);
@@ -649,12 +639,12 @@
                     
                 }
                 if(route == 1){
-                    speed=speed1;
+                    speed[0]=speed[1];
                 }else if(route == 2){
-                    speed=speed2;
+                    speed[0]=speed[2];
                 }
                 route_dest.push(poly[i]);
-                dest = (60*(dest+dest_old))/(speed);
+                dest = (60*(dest+dest_old))/(speed[0]*1000);
 
                 if(cal==1){
                     map.Overlays.add(MarkerCar2);

@@ -67,6 +67,51 @@ class FirebaseController extends Controller
         return $this->responseRequestSuccess($data);
     }
 
+    public function indexpeople($bus,$old)
+    {
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/laravelfirebase-47dc3-firebase-adminsdk-fjufv-e18dc2835c.json');
+        // laravelfirebase-9d875-firebase-adminsdk-wltre-a1b8486a6c
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://laravelfirebase-47dc3.firebaseio.com/')
+            ->create();
+        $database = $firebase->getDatabase();
+        $ref = $database->getReference("location/$bus");
+
+        $newLocation = $database
+            ->getReference("location/$bus")
+            ->update([
+                'old' => $old
+            ]);
+
+        $location = $ref->getvalue();
+        $data = [];
+        $data['old'] = $location['old'];
+
+        return $this->responseRequestSuccess($data);
+    }
+
+    public function get_people()
+    {
+        $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/laravelfirebase-47dc3-firebase-adminsdk-fjufv-e18dc2835c.json');
+        // laravelfirebase-9d875-firebase-adminsdk-wltre-a1b8486a6c
+        $firebase = (new Factory)
+            ->withServiceAccount($serviceAccount)
+            ->withDatabaseUri('https://laravelfirebase-47dc3.firebaseio.com/')
+            ->create();
+
+        $database = $firebase->getDatabase();
+        $ref = $database->getReference('location/bus1');
+        $location = $ref->getvalue();
+        $data = [];
+        $data['bus1']['old'] = $location['old'];
+        $ref = $database->getReference('location/bus2');
+        $location = $ref->getvalue();
+        $data['bus2']['old'] = $location['old'];
+
+        return $this->responseRequestSuccess($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

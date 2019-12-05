@@ -34,6 +34,11 @@ Route::get('firebase/{bus}/{lat}/{long}/{speed}','FirebaseController@index');
 Route::get('firebase/getlocation','FirebaseController@get_location');
 Route::get('countimage','LocationController@countimg');
 Route::get('savecount','LocationController@savecount');
+Route::get('firebase/getpeople','FirebaseController@get_people');
+Route::get('firebase/{bus}/{num}','FirebaseController@indexpeople');
+// Route::get('firebasenew/{num}','FirebaseController@indexnew');
+// Route::get('firebasenew/getpeople','FirebaseController@get_peoplenew');
+
 
 Route::get('dashboard_ebus', 'DashboardController@index');
 Route::get('search', 'DashboardController@search');

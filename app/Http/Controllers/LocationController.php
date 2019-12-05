@@ -34,8 +34,8 @@ class LocationController extends Controller
         return view('ebus',compact('locations','routes','route_locations','buildings'));
     }
 
-    public function countimg()
-    {
+    public function countimg(){
+        
         $images=Image::all()->toArray();
 
         $cloud = new ServiceBuilder([
@@ -53,7 +53,6 @@ class LocationController extends Controller
         $imageName = "faceapi" . '.jpg';
 
         Storage::disk('public')->put($imageName, base64_decode($test));
-        // dd($test);
 
         $output = imagecreatefromjpeg(public_path('storage/faceapi.jpg'));
         $image = $vision->image(file_get_contents(public_path('storage/faceapi.jpg'))
@@ -62,6 +61,7 @@ class LocationController extends Controller
         $results = $vision->annotate($image);
 
         $counter = 0;
+        
         foreach ($results->faces() as $face) {
             $counter++;
 //            $face[number];
@@ -72,7 +72,8 @@ class LocationController extends Controller
                 $y2 = $vertices[2]['y'];
                 imagerectangle($output, $x1, $y1, $x2, $y2, 0x00ff00);
         }
-        header('Content-Type: image/jpeg');
+        
+        // header('Content-Type: image/jpeg');
         $faces=$counter;
         return $this->responseRequestSuccess($faces);
     }
