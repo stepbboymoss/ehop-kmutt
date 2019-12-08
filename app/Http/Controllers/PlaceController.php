@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Route;
 use App\route_location;
-use App\Bus;
 
 class PlaceController extends Controller
 {
@@ -25,8 +24,8 @@ class PlaceController extends Controller
         $locations=Location::all()->toArray();
         $routes=Route::all()->toArray();
         $route_locations=route_location::all()->toArray();
-        $buses=Bus::all()->toArray();
-        return view('map',compact('locations','routes','route_locations','buses'));
+
+        return view('map',compact('locations','routes','route_locations'));
     }
 
     /**
@@ -106,4 +105,5 @@ class PlaceController extends Controller
         $place->delete();
         return redirect()->route('place.index')->with('success','ลบข้อมูลสำเร็จ');
     }
+
 }
