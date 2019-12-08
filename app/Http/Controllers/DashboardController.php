@@ -12,7 +12,7 @@ class DashboardController extends Controller
                 "11","12","13","14","15","16","17","18","19","20",
                 "21","22","23","24","25","26","27","28","29","30","31"];
     public $month_s = ["00","31","28","31","30","31",
-        "30","31","31","30","31","30","31"];  
+                "30","31","31","30","31","30","31"];  
 
     /**
      * Display a listing of the resource.
@@ -20,15 +20,17 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
-    {
+    public function __construct(){
+        $this->middleware('auth'); 
+    }
+
+    public function index(){
         $year=date("Y", time());
         $month=date("m", time());
         return view('dashboard',compact('month','year'));
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
         $this->validate($request, [ 
@@ -63,11 +65,10 @@ class DashboardController extends Controller
 
         if($peoples != "[]" || $dates != "[]"){
             return $this->responseRequestSuccess($barchart);
-            // return view('dashboard',compact('month','year'))
-            // ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
         }else{
-            return view('dashboard',compact('month','year'))
-            ->withChartarray ($barchart)->with('success', 'ไม่สำเสร็จ');
+            $year=date("Y", time());
+            $month=date("m", time());
+            return view('dashboard',compact('month','year'));
         }
     }
 
@@ -95,20 +96,19 @@ class DashboardController extends Controller
 
         if($peoples != "[]" || $dates != "[]"){
             return $this->responseRequestSuccess($barchart);
-            // return view('dashboard',compact('month','year'))
-            // ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
         }else{
-            return view('dashboard',compact('month','year'))
-            ->withChartarray ($barchart)->with('success', 'ไม่สำเสร็จ');
+            $year=date("Y", time());
+            $month=date("m", time());
+            return view('dashboard',compact('month','year'));
         }
     }
 
     public function barchartbus2(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
-        $this->validate($request, [ 
+        $this->validate($request,  [ 
             'month'  => 'required',
-            'year'  => 'required'  ]);
+            'year'   => 'required' ]);
 
         $month = $request->get('month');
         $year = $request->get('year');
@@ -127,14 +127,13 @@ class DashboardController extends Controller
 
         if($peoples != "[]" || $dates != "[]"){
             return $this->responseRequestSuccess($barchart);
-            // return view('dashboard',compact('month','year'))
-            // ->withChartarray ($barchart)->with('success', 'เสร็จสมบรูณ์');
         }else{
-            return view('dashboard',compact('month','year'))
-            ->withChartarray ($barchart)->with('success', 'ไม่สำเสร็จ');
+            $year=date("Y", time());
+            $month=date("m", time());
+            return view('dashboard',compact('month','year'));
         }
     }
-    
+
     public function barhighchart($peoples,$dates,$deside){
         //Highcharts
         $chartArray ["chart"] = array(
@@ -267,11 +266,6 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function countimg()
-    {
-        $faces=100;
-        return $this->responseRequestSuccess($faces);
     }
 
     protected function responseRequestSuccess($ret)

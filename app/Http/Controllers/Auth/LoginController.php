@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -26,23 +27,23 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/dashboard_ebus';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
-    {
+
+    public function __construct(){
         $this->middleware('guest')->except('logout');
     }
 
-    // public function logout(Request $request) { 
-    //     $this->guard()->logout();
-    //     $request->session()->invalidate();
-    //     return redirect('/login');
-    // }
+    public function logout(Request $request){ 
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        return redirect('/login');
+    }
 
     // protected function credentials(Request $request) 
     // { 
@@ -51,5 +52,29 @@ class LoginController extends Controller
 
     //     return [$field => $request->get($this->username()), 'password' => 
     //     $request->password,]; 
+    // }
+
+    // public function login(Request $request){
+    //     $this->validate($request, [ 
+    //         'username'  => 'required',
+    //         'password'  => 'required'  ]);
+    //     $username_required = $request->get('username');
+    //     $password_required = $request->get('password');
+    //     $users=User::all()->toArray();
+        
+    //     foreach ($users as $user) {
+    //         $username=$user['username'];
+    //         $password=$user['password'];
+    //         if($username_required == $username && $password_required == $password){
+    //             $access = 1;
+    //         }
+    //     }
+
+    //     dd($test);
+    //     if($access == 1){
+    //         return view('ebus');
+    //     }else{
+    //         return view('login');
+    //     }
     // }
 }

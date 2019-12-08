@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Kreait\Firebase;
-use Kreait\Firebase\Factory;
-use Kreait\Firebase\ServiceAccount;
 
-class FirebaseController extends Controller
+class SaveFirebaseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,46 +12,56 @@ class FirebaseController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function get_location(){
+    public function __construct(){
+        $this->middleware('auth'); 
+    }
+
+    public function index($bus,$lat,$long,$speed){
         $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/laravelfirebase-47dc3-firebase-adminsdk-fjufv-e18dc2835c.json');
         // laravelfirebase-9d875-firebase-adminsdk-wltre-a1b8486a6c
         $firebase = (new Factory)
             ->withServiceAccount($serviceAccount)
             ->withDatabaseUri('https://laravelfirebase-47dc3.firebaseio.com/')
             ->create();
-
         $database = $firebase->getDatabase();
-        $ref = $database->getReference('location/bus1');
+        $ref = $database->getReference("location/$bus");
+
+        $newLocation = $database
+            ->getReference("location/$bus")
+            ->update([
+                'lat' => $lat,
+                'long' => $long,
+                'speed' => $speed
+            ]);
+
         $location = $ref->getvalue();
         $data = [];
-        $data['bus1']['lat'] = $location['lat'];
-        $data['bus1']['long'] = $location['long'];
-        $data['bus1']['speed'] = $location['speed'];
-        $ref = $database->getReference('location/bus2');
-        $location = $ref->getvalue();
-        $data['bus2']['lat'] = $location['lat'];
-        $data['bus2']['long'] = $location['long'];
-        $data['bus2']['speed'] = $location['speed'];
+        $data['lat'] = $location['lat'];
+        $data['long'] = $location['long'];
+        $data['speed'] = $location['speed'];
 
         return $this->responseRequestSuccess($data);
     }
 
-    public function get_people(){
+    public function indexpeople($bus,$old){
         $serviceAccount = ServiceAccount::fromJsonFile(__DIR__.'/laravelfirebase-47dc3-firebase-adminsdk-fjufv-e18dc2835c.json');
         // laravelfirebase-9d875-firebase-adminsdk-wltre-a1b8486a6c
         $firebase = (new Factory)
             ->withServiceAccount($serviceAccount)
             ->withDatabaseUri('https://laravelfirebase-47dc3.firebaseio.com/')
             ->create();
-
         $database = $firebase->getDatabase();
-        $ref = $database->getReference('location/bus1');
+        $ref = $database->getReference("location/$bus");
+
+        $newLocation = $database
+            ->getReference("location/$bus")
+            ->update([
+                'old' => $old
+            ]);
+
         $location = $ref->getvalue();
         $data = [];
-        $data['bus1']['old'] = $location['old'];
-        $ref = $database->getReference('location/bus2');
-        $location = $ref->getvalue();
-        $data['bus2']['old'] = $location['old'];
+        $data['old'] = $location['old'];
 
         return $this->responseRequestSuccess($data);
     }
@@ -124,28 +131,4 @@ class FirebaseController extends Controller
     {
         //
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | response เมื่อข้อมูลส่งถูกต้อง
-    |--------------------------------------------------------------------------
-     */
-    protected function responseRequestSuccess($ret)
-    {
-        return response()->json(['status' => 'success', 'data' => $ret], 200)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    }
-    /*
-    |--------------------------------------------------------------------------
-    | response เมื่อข้อมูลมีการผิดพลาด
-    |--------------------------------------------------------------------------
-     */
-    protected function responseRequestError($status = '', $ret = '', $message = 'Bad request', $statusCode = 200)
-    {
-        return response()->json(['status' => $status, 'data' => $ret, 'error' => $message], $statusCode)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    }
-
 }

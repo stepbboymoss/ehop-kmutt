@@ -30,12 +30,12 @@ Route::resource('/ebus', 'LocationController');
 
 Route::resource('/map', 'PlaceController');
 
-Route::get('firebase/{bus}/{lat}/{long}/{speed}','FirebaseController@index');
+Route::get('firebase/{bus}/{lat}/{long}/{speed}','SaveFirebaseController@index');
 Route::get('firebase/getlocation','FirebaseController@get_location');
 Route::get('countimage','LocationController@countimg');
 Route::get('savecount','LocationController@savecount');
 Route::get('firebase/getpeople','FirebaseController@get_people');
-Route::get('firebase/{bus}/{num}','FirebaseController@indexpeople');
+Route::get('firebase/{bus}/{num}','SaveFirebaseController@indexpeople');
 // Route::get('firebasenew/{num}','FirebaseController@indexnew');
 // Route::get('firebasenew/getpeople','FirebaseController@get_peoplenew');
 
@@ -52,3 +52,7 @@ Route::get('chartbus2', 'DashboardController@barchartbus2');
 Route::get('test', 'DashboardController@index');
 
 Auth::routes();
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

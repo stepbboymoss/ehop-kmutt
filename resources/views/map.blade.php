@@ -357,7 +357,7 @@
             var dest=0;
             var bus_stop=[];
             var bus_track=[];
-            var speed[];
+            var speed=[];
             var route_dest=[];
             var bus_now=[];
             var result=[];
