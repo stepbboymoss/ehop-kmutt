@@ -150,7 +150,7 @@
                                                     <img src="{{ URL::asset('dashboard/images/pumin.png')}}" alt="John Doe" />
                                                 </div>
                                                 <div class="content">
-                                                    <a class="js-acc-btn" href="#">Admin</a>
+                                                    <a class="js-acc-btn" href="#">{{ Auth::user()->name }} </a>
                                                 </div>
                                                 <div class="account-dropdown js-dropdown">
                                                     <div class="info clearfix">
@@ -161,14 +161,18 @@
                                                             <h5 class="name">
                                                                 <a href="#">Admin</a>
                                                             </h5>
-                                                            <span class="email">Topumin@kmutt.ac.th</span>
+                                                            <span class="email">{{ Auth::user()->email }} </span>
                                                         </div>
                                                     </div>
                                                     <div class="account-dropdown__footer">
-                                                        <a href="#">
-                                                            <i class="zmdi zmdi-power"></i>Logout
-                                                        </a>
-                                                    </div>    
+                                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                                            <i class="zmdi zmdi-power"></i>Logout</a>
+
+                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
