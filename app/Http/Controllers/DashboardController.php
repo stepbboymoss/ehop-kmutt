@@ -8,21 +8,21 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public $day_s = ["00","01","02","03","04","05","06","07","08","09","10",
                 "11","12","13","14","15","16","17","18","19","20",
                 "21","22","23","24","25","26","27","28","29","30","31"];
     public $month_s = ["00","31","28","31","30","31",
-                "30","31","31","30","31","30","31"];  
+                "30","31","31","30","31","30","31"];
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct(){
-        $this->middleware('auth'); 
-    }
 
     public function index(){
         $year=date("Y", time());
@@ -33,7 +33,7 @@ class DashboardController extends Controller
     public function search(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
-        $this->validate($request, [ 
+        $this->validate($request, [
             'month'  => 'required',
             'year'  => 'required'  ]);
 
@@ -45,7 +45,7 @@ class DashboardController extends Controller
     public function barchartbus(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
-        $this->validate($request, [ 
+        $this->validate($request, [
             'month'  => 'required',
             'year'  => 'required'  ]);
 
@@ -75,7 +75,7 @@ class DashboardController extends Controller
     public function barchartbus1(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
-        $this->validate($request, [ 
+        $this->validate($request, [
             'month'  => 'required',
             'year'  => 'required'  ]);
 
@@ -106,7 +106,7 @@ class DashboardController extends Controller
     public function barchartbus2(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
-        $this->validate($request,  [ 
+        $this->validate($request,  [
             'month'  => 'required',
             'year'   => 'required' ]);
 
