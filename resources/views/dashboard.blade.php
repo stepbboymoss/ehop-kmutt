@@ -61,6 +61,45 @@
                                 <a class="js-arrow" href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
                                 <ul class="navbar-mobile-sub__list list-unstyled js-sub-list"></ul>
                             </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-desktop"></i>UI Elements</a>
+                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                    <li>
+                                        <a href="button.html">Button</a>
+                                    </li>
+                                    <li>
+                                        <a href="badge.html">Badges</a>
+                                    </li>
+                                    <li>
+                                        <a href="tab.html">Tabs</a>
+                                    </li>
+                                    <li>
+                                        <a href="card.html">Cards</a>
+                                    </li>
+                                    <li>
+                                        <a href="alert.html">Alerts</a>
+                                    </li>
+                                    <li>
+                                        <a href="progress-bar.html">Progress Bars</a>
+                                    </li>
+                                    <li>
+                                        <a href="modal.html">Modals</a>
+                                    </li>
+                                    <li>
+                                        <a href="switch.html">Switchs</a>
+                                    </li>
+                                    <li>
+                                        <a href="grid.html">Grids</a>
+                                    </li>
+                                    <li>
+                                        <a href="fontawesome.html">Fontawesome Icon</a>
+                                    </li>
+                                    <li>
+                                        <a href="typo.html">Typography</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -144,6 +183,45 @@
 
                                 <div class="header-button">
                                     <div class="noti-wrap">
+<!--                                        <div class="noti__item js-item-menu">-->
+<!--                                            <i class="zmdi zmdi-notifications"></i>-->
+<!--                                            <span class="quantity">3</span>-->
+<!--                                            <div class="notifi-dropdown js-dropdown">-->
+<!--                                                <div class="notifi__title">-->
+<!--                                                    <p>You have 3 Notifications</p>-->
+<!--                                                </div>-->
+<!--                                                <div class="notifi__item">-->
+<!--                                                    <div class="bg-c1 img-cir img-40">-->
+<!--                                                        <i class="zmdi zmdi-email-open"></i>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="content">-->
+<!--                                                        <p>You got a email notification</p>-->
+<!--                                                        <span class="date">April 12, 2018 06:50</span>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="notifi__item">-->
+<!--                                                    <div class="bg-c2 img-cir img-40">-->
+<!--                                                        <i class="zmdi zmdi-account-box"></i>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="content">-->
+<!--                                                        <p>Your account has been blocked</p>-->
+<!--                                                        <span class="date">April 12, 2018 06:50</span>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="notifi__item">-->
+<!--                                                    <div class="bg-c3 img-cir img-40">-->
+<!--                                                        <i class="zmdi zmdi-file-text"></i>-->
+<!--                                                    </div>-->
+<!--                                                    <div class="content">-->
+<!--                                                        <p>You got a new file</p>-->
+<!--                                                        <span class="date">April 12, 2018 06:50</span>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
+<!--                                                <div class="notifi__footer">-->
+<!--                                                    <a href="#">All notifications</a>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
                                         <div class="account-wrap">
                                             <div class="account-item clearfix js-item-menu">
                                                 <div class="image">

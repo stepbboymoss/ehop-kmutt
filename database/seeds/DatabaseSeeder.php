@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RoutelocationsTableSeeder::class);
         $this->call(RoutesTableSeeder::class);
         $this->call(DashboardsTableSeeder::class);
+        $this->call(ImagesTableSeeder::class);
     }
 }
