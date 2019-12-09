@@ -33,12 +33,16 @@ class DashboardController extends Controller
     public function search(Request $request){
         $year=date("Y", time());
         $month=date("m", time());
+        
         $this->validate($request, [
             'month'  => 'required',
             'year'  => 'required'  ]);
-
+        
+        $day = 1;
         $month = $request->get('month');
         $year = $request->get('year');
+        
+        // dd($month);
         return view('dashboard',compact('month','year'));
     }
 
@@ -112,7 +116,7 @@ class DashboardController extends Controller
 
         $month = $request->get('month');
         $year = $request->get('year');
-
+        
         for($i = 1; $i <= $this->month_s[(int)$month]; $i++){
             $dates[$i]=date('Y-m-d', strtotime("$year-$month-$i"));
             $peoples[$i] = Dashboard::select('people')

@@ -43,7 +43,7 @@
                 <div class="header-mobile__bar">
                     <div class="container-fluid">
                         <div class="header-mobile-inner">
-                            <a class="logo" href="index.html">
+                            <a class="logo" href="{{ url('dashboard_ebus') }}">
                                 <img src="{{ URL::asset('dashboard/images/icon/EHOP.png')}}" alt="CoolAdmin" />
                             </a>
                             <button class="hamburger hamburger--slider" type="button">
@@ -56,10 +56,25 @@
                 </div>
                 <nav class="navbar-mobile">
                     <div class="container-fluid">
-                        <ul class="navbar-mobile__list list-unstyled">
+                        <ul class="navbar-mobile__list list-unstyled">                            
                             <li class="has-sub">
-                                <a class="js-arrow" href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
-                                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list"></ul>
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-user"></i>Username:{{ Auth::user()->name }}
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-desktop"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i> Logout</a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </div>
@@ -70,17 +85,31 @@
             <!-- MENU SIDEBAR-->
             <aside class="menu-sidebar d-none d-lg-block">
                 <div class="logo">
-                    <a href="dashboard_ebus">
-                    <br><br><img src="{{ URL::asset('dashboard/images/icon/EHOP.png')}}" alt="Cool Admin" />
+                    <a href="{{ url('dashboard_ebus') }}">
+                        <img src="{{ URL::asset('dashboard/images/icon/EHOP.png')}}" alt="CoolAdmin" />
                     </a>
                 </div>
                 <div class="menu-sidebar__content js-scrollbar1">
                     <nav class="navbar-sidebar">
                         <ul class="list-unstyled navbar__list">
-                            <li class="active has-sub">
-                                <a class="js-arrow" href="{{url('/dashboard_ebus')}}">
-                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-user"></i>Username:{{ Auth::user()->name }}
                                 </a>
+                            </li>
+                            <li class="has-sub">
+                                <a class="js-arrow" href="#">
+                                    <i class="fas fa-desktop"></i>Dashboard
+                                </a>
+                            </li>
+                            <li class="has-sub">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt"></i> Logout</a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </nav>
@@ -92,109 +121,50 @@
             <div class="page-container">
                 <!-- HEADER DESKTOP-->
                 <header class="header-desktop">
-                    <br>
                     <div class="section__content section__content--p30">
                         <div class="container-fluid">
                             <div class="header-wrap">
-                                <nav id="breadcrumbs">
-                                    <!-- @if(count($errors) > 0)
-                                        <div class="alert alert-danger">
-                                            กรุณาใส่ข้อมูลให้ครบทุกช่อง <br>
-                                        </div>
-                                    @endif
-                                    @if($message = Session::get('success'))
-                                        <div class="alert alert-success alert-block">
-                                            <button type="button" class="close" data-dismiss="alert">×</button>
-                                            <strong>{{ $message }}</strong>
-                                        </div>
-                                    @endif -->
-
-                                    <form class="form-header" action="/search" method="get">
-                                        <div class="col-md-12">
-                                            <select class="form-control" name="month" id="list-month">
-                                                <option value="">กรุณาเลือกเดือน</option>
-                                                <option value="1">มกราคม</option>
-                                                <option value="2">กุมภาพันธ์ </option>
-                                                <option value="3">มีนาคม </option>
-                                                <option value="4">เมษายน</option>
-                                                <option value="5">พฤษภาคม</option>
-                                                <option value="6">มิถุนายน</option>
-                                                <option value="7">กรกฎาคม </option>
-                                                <option value="8">สิงหาคม</option>
-                                                <option value="9">กันยายน</option>
-                                                <option value="10">ตุลาคม</option>
-                                                <option value="11">พฤศจิกายน</option>
-                                                <option value="12">ธันวาคม</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <select class="form-control" name="year" id="list-year">
-                                                <option value="">กรุณาเลือกปี</option>
-                                                <option value="2017">2560</option>
-                                                <option value="2018">2561 </option>
-                                                <option value="2019">2562 </option>
-                                            </select>
-                                        </div>
-                                        <span class = "input-group-prepend">
-                                            <button type = "submit" href="{{url('/search')}}" class = "au-btn--submit">
-                                                <i class="zmdi zmdi-search"></i></button>
-                                        </span>
-                                    </form>
-                                </nav>
-
-                                <div class="header-button">
-                                    <div class="noti-wrap">
-                                        <div class="account-wrap">
-                                            <div class="account-item clearfix js-item-menu">
-                                                <div class="image">
-                                                    <img src="{{ URL::asset('dashboard/images/pumin.png')}}" alt="John Doe" />
-                                                </div>
-                                                <div class="content">
-                                                    <a class="js-acc-btn" href="#">{{ Auth::user()->name }} </a>
-                                                </div>
-                                                <div class="account-dropdown js-dropdown">
-                                                    <div class="info clearfix">
-                                                        <div class="image">
-                                                            <img src="{{ URL::asset('dashboard/images/pumin.png')}}" alt="John Doe" />
-                                                        </div>
-                                                        <div class="content">
-                                                            <h5 class="name">
-                                                                <a href="#">Admin</a>
-                                                            </h5>
-                                                            <span class="email">{{ Auth::user()->email }} </span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="account-dropdown__footer">
-                                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                                            <i class="zmdi zmdi-power"></i>Logout</a>
-
-                                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                                            @csrf
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <form class="form-header" action="/search" method="get">
+                                    <div class="col-md-8 col-xl-12 px-0">
+                                        <select class="form-control" name="month" id="list-month">
+                                            <option value="">กรุณาเลือกเดือน</option>
+                                            <option value="1">มกราคม</option>
+                                            <option value="2">กุมภาพันธ์ </option>
+                                            <option value="3">มีนาคม </option>
+                                            <option value="4">เมษายน</option>
+                                            <option value="5">พฤษภาคม</option>
+                                            <option value="6">มิถุนายน</option>
+                                            <option value="7">กรกฎาคม </option>
+                                            <option value="8">สิงหาคม</option>
+                                            <option value="9">กันยายน</option>
+                                            <option value="10">ตุลาคม</option>
+                                            <option value="11">พฤศจิกายน</option>
+                                            <option value="12">ธันวาคม</option>
+                                        </select>
                                     </div>
-                                </div>
+                                    <div class="col-md-8 col-xl-12">
+                                        <select class="form-control" name="year" id="list-year">
+                                            <option value="">กรุณาเลือกปี</option>
+                                            <option value="2017">2560</option>
+                                            <option value="2018">2561 </option>
+                                            <option value="2019">2562 </option>
+                                        </select>
+                                    </div>
+                                    <span class = "input-group-prepend">
+                                        <button type = "submit" href="{{url('/search')}}" class = "au-btn--submit">
+                                            <i class="zmdi zmdi-search"></i></button>
+                                    </span>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </header>
-                <!-- HEADER DESKTOP-->
+                <!-- END HEADER DESKTOP-->
 
                 <!-- MAIN CONTENT-->
                 <div class="main-content">
                     <div class="section__content section__content--p30">
                         <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="overview-wrap">
-                                        <h2 class="title-1">overview</h2>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="au-card recent-report">
@@ -247,10 +217,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="copyright">
+                                        <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- END MAIN CONTENT-->
             </div>
+            <!-- END PAGE CONTAINER-->
+
         </div>
 
         <!-- Jquery JS-->
@@ -287,12 +267,10 @@
 
             $.get( "chartbus1?month={{$month}}&year={{$year}}", function( result ) {
                 $('#container2').highcharts( result['data'])
-                console.log(result['data']);
             });
 
             $.get( "chartbus2?month={{$month}}&year={{$year}}", function( result ) {
-                $('#container3').highcharts( result['data'])
-                console.log(result['data']);
+                $('#container3').highcharts( result['data'])    
             });
 
         </script>

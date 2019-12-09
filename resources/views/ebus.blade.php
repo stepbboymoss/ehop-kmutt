@@ -59,7 +59,7 @@
         <div class="site-preloader-wrap">
             <div class="sk-cube-grid">
             <!-- <div class="container"> -->
-                <!-- <img class="scale-img" src="{{ URL::asset('assets/img/load.png') }}" ></a> -->
+                <img class="scale-img" src="{{ URL::asset('/load.gif') }}" >
                 <!-- <div class="sk-cube sk-cube1"></div>
                 <div class="sk-cube sk-cube2"></div>
                 <div class="sk-cube sk-cube3"></div>
